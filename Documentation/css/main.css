@@ -1,0 +1,687 @@
+/*
+ *  Document   : main.css
+ *  Author     : BEB300 Technologies
+ *  Description: The main stylesheet of the documentation
+ *
+ *  Colors     : #444, #db4a39, #ddd, #eee, #f9f9f9
+ */
+
+/*
+=================================================================
+INTRO
+=================================================================
+*/
+
+#thank-you {
+    text-align: center;
+    width: 940px;
+    margin: 200px auto;
+    font-size: 72px;
+    font-weight: 900;
+    font-style: italic;
+}
+
+
+
+.js #thank-you, .js #beb300-logo {
+    display: none;
+}
+
+.no-js #thank-you, .no-js #beb300-logo {
+    margin: 50px auto;
+}
+
+/*
+=================================================================
+MAIN LAYOUT
+=================================================================
+*/
+
+body {
+    color: #444;
+    font: 15px Roboto, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+}
+
+#container {
+    margin: 0 auto;
+    width: 960px;
+    padding: 0 0 50px;
+}
+
+header {
+    height: 70px;
+    background-color: #fff;
+    border-bottom: 5px solid #4a5cf2;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(0,0,0,0.6);
+    padding: 0 10px;
+    margin: 0 0 10px;
+}
+
+#header-logo {
+    font-size: 30px;
+    font-weight: 900;
+    font-style: italic;
+    float: left;
+    line-height: 75px;
+    color: #444;
+}
+
+#header-logo:hover {
+    color: #db4a39;
+    text-decoration: none;
+}
+
+#header-version {
+    float: right;
+    margin: 34px 0 0;
+}
+
+#main-container {
+    background-color: #fff;
+    padding: 20px 30px;
+    border: 2px solid #eee;
+}
+
+#main-nav {
+    padding: 0 20px;
+    width: 210px;
+    float: left;
+}
+
+#main {
+    margin: 0 0 0 270px;
+}
+
+footer {
+    background-color: #fff;
+    border-top: 3px solid #999;
+    font-size: 12px;
+    line-height: 30px;
+    height: 30px;
+    padding: 0 10px;
+    position: fixed;
+    bottom: 0;
+    width: 940px;
+    z-index: 1000;
+}
+
+#footer-info {
+    float: left;
+}
+
+#footer-nav {
+    float: right;
+}
+
+/*
+=================================================================
+LINKS
+=================================================================
+*/
+
+a {
+    color: #4a5cf2;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+/*
+=================================================================
+MAIN NAVIGATION
+=================================================================
+*/
+
+#main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#main-nav a {
+    color: #777;
+    display: block;
+    line-height: 34px;
+    height: 30px;
+    padding: 0 0 0 20px;
+    margin: 5px 0 5px -20px;
+    border-left: 3px solid #f9f9f9;
+}
+
+#main-nav a:hover {
+    color: #db4a39;
+    border-left: 3px solid #db4a39;
+    text-decoration: none;
+}
+
+#main-nav .active a {
+    border-left: 3px solid #4a5cf2;
+    background-color: #f9f9f9;
+    color: #000;
+}
+
+#main-nav .h2 a {
+    margin: 5px 0;
+}
+
+#main-nav .h3 a {
+    margin: 5px 0 5px 10px;
+}
+
+/*
+=================================================================
+FOOTER NAVIGATION
+=================================================================
+*/
+
+#footer-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#footer-nav-list li {
+    float: right;
+    margin: 5px 0 0 10px;
+    line-height: 20px;
+}
+
+#footer-nav-list a {
+    height: 20px;
+    display: block;
+    background-image: url('../img/footer-icon-links.png');
+}
+
+a.footer-link-portfolio {
+    width: 22px;
+    background-position: 0 0;
+}
+
+a.footer-link-portfolio:hover {
+    background-position: 0 20px;
+}
+
+.text-portfolio {
+    color: #875929;
+}
+
+a.footer-link-website {
+    width: 20px;
+    background-position: 87px 0;
+}
+
+a.footer-link-website:hover {
+    background-position: 87px 20px;
+}
+
+.text-website {
+    color: #db4a39;
+}
+
+a.footer-link-contact {
+    width: 20px;
+    background-position: 67px 0;
+}
+
+a.footer-link-contact:hover {
+    background-position: 67px 20px;
+}
+
+.text-contact {
+    color: #588311;
+}
+
+a.footer-link-twitter {
+    width: 25px;
+    background-position: 47px 0;
+}
+
+a.footer-link-twitter:hover {
+    background-position: 47px 20px;
+}
+
+.text-twitter {
+    color: #2daae2;
+}
+
+a.footer-link-facebook {
+    width: 22px;
+    background-position: 22px 0;
+}
+
+a.footer-link-facebook:hover {
+    background-position: 22px 20px;
+}
+
+.text-facebook {
+    color: #3b5998;
+}
+
+/*
+=================================================================
+TYPOGRAPHY
+=================================================================
+*/
+
+h1 {
+    margin: 5px 0 5px -10px;
+    padding: 5px 10px;
+    font-size: 20px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+}
+
+h2 {
+    margin: 5px 0;
+    padding: 5px 10px 5px 0;
+    color: #555;
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+}
+
+h3 {
+    margin: 0;
+    padding: 5px 10px 0 0;
+    color: #777;
+    font-size: 16px;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 10px 0 10px 25px;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+li {
+  line-height: 20px;
+}
+
+ul.unstyled,
+ol.unstyled {
+  margin-left: 0;
+  list-style: none;
+}
+
+ul.inline,
+ol.inline {
+  margin-left: 0;
+  list-style: none;
+}
+
+ul.inline > li,
+ol.inline > li {
+  display: inline-block;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+dl {
+  margin-bottom: 20px;
+}
+
+dt,
+dd {
+  line-height: 20px;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin-left: 10px;
+}
+
+.muted {
+  color: #999999;
+}
+
+.text-warning {
+  color: #c09853;
+}
+
+.text-error {
+  color: #b94a48;
+}
+
+.text-info {
+  color: #3a87ad;
+}
+
+.text-success {
+  color: #468847;
+}
+
+.table {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.table th,
+.table td {
+    border: 2px solid #eee;
+}
+
+.table th {
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.table td {
+    padding: 5px;
+}
+
+.author-comment {
+    margin: 5px 0 5px -10px;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-left: 5px solid #eee;
+    border-right: 5px solid #eee;
+}
+
+.divider {
+    margin: 10px 0;
+    border-bottom: 2px solid #eee;
+}
+
+/*
+=================================================================
+HELPERS
+=================================================================
+*/
+
+.text-bold {
+    font-weight:bold;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.padding-none {
+    padding:0;
+}
+
+.margin-none {
+    margin:0;
+}
+
+.display-block {
+    display:inline;
+}
+
+.display-inline {
+    display:inline;
+}
+
+.display-inline-block {
+    display:inline-block;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer {
+    cursor:pointer;
+}
+
+img {
+    vertical-align: middle;
+}
+
+/* Text Selection */
+::-moz-selection {
+    background: #db4a39;
+    color: #fff;
+    text-shadow: none;
+}
+
+::selection {
+    background: #db4a39;
+    color: #fff;
+    text-shadow: none;
+}
+
+
+/* Clearfix */
+.cf:before,.cf:after {
+    content: " ";
+    display:table;
+}
+
+.cf:after {
+    clear:both;
+}
+
+.cf {
+    *zoom: 1;
+}
+
+/*
+=================================================================
+RESPONSIVE
+=================================================================
+*/
+
+@media only screen and (min-width: 1200px) {
+
+    #container {
+        width: 1140px;
+    }
+
+    footer {
+        width: 1120px;
+    }
+}
+
+@media only screen and (min-width: 720px) and (max-width: 959px) {
+
+    #thank-you {
+        width: 100%;
+        margin: 150px auto;
+        font-size: 50px;
+    }
+
+    #container {
+        width: 100%;
+        padding-bottom: 0;
+    }
+
+    #main-nav {
+        display: none;
+    }
+
+    #main {
+        margin: 0;
+    }
+
+    footer {
+        position: static;
+        width: auto;
+        text-align: center;
+    }
+
+    .footer-info-text {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 719px) {
+
+    #thank-you {
+        width: 100%;
+        min-width: 320px;
+        margin: 100px auto;
+        font-size: 36px;
+    }
+
+    #beb300-logo {
+        margin: 50px auto;
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+    header {
+        height: 50px;
+        margin: 0;
+        background: #eee;
+    }
+
+    #header-logo {
+        line-height: 52px;
+        font-size: 20px;
+    }
+
+    #header-version {
+        margin: 18px 0 0;
+        font-size: 12px;
+    }
+
+    #container {
+        width: 100%;
+        min-width: 300px;
+        padding-bottom: 0;
+    }
+
+    #main-container {
+        padding: 10px;
+        border: none;
+    }
+
+    #main-nav {
+        display: none;
+    }
+
+    #main {
+        margin: 0;
+    }
+
+    h1, h2, .author-comment {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    h1 {
+        font-size: 18px;
+        border-top: 1px solid #eee;
+    }
+
+    h2 {
+        padding: 0 10px;
+        font-size: 16px;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+
+    footer {
+        position: static;
+        width: auto;
+        text-align: center;
+        height: 60px;
+    }
+
+    #footer-info, #footer-nav {
+        float: none;
+    }
+
+    #footer-info {
+        position: static;
+    }
+
+    .footer-info-text {
+        display: none;
+    }
+
+    #footer-nav {
+        width: 160px;
+        margin: 0 auto;
+        position: static;
+    }
+}
+
+/*
+=================================================================
+PRINT
+=================================================================
+*/
+
+@media print {
+    body {
+        background: #fff;
+    }
+
+    #container {
+        padding: 0;
+    }
+
+    #main-container {
+        border: none;
+    }
+
+    #main-nav {
+        display: none;
+    }
+
+    #main {
+        margin: 0;
+    }
+
+    h1 {
+        margin-left: 0;
+    }
+
+    footer {
+        position: static;
+        text-align: center;
+    }
+
+    #footer-info {
+        float: none;
+    }
+
+    #footer-nav {
+        display: none;
+    }
+}

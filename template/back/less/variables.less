@@ -1,0 +1,356 @@
+@font-family                : 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@font-size                  : 12px;
+@page-title-font-size       : 27px;
+
+@body-bg                    : #e8ebf0;
+@body-color                 : #404040;
+
+@link-color                 : @body-color;
+@link-hover-color           : darken(@body-color, 5%);
+
+@border-color               : #e9e9e9;
+@border-color2              : darken(@border-color,5%);
+@border-radius              : 2px;
+
+
+
+
+
+
+
+
+
+// CLEAN ZONE (LOGIN, REGISTER, AND ERROR PAGES CONTAINER)
+//============================================
+@cls-bg                     : #212124;
+@cls-color                  : #fff;
+
+
+
+
+
+
+
+
+
+
+
+// NAVBAR & LOGO
+//============================================
+@navbar-bg                  : #fff;
+@navbar-color               : @body-color;
+@brand-bg                   : transparent;
+@brand-bg-overlay           : @mainnav-bg;
+@brand-color                : @state-active-color;
+@brand-color-overlay        : @navbar-color;
+@brand-font-size            : 20px;
+
+
+
+
+
+
+
+
+
+
+
+
+// NAVIGATION
+//============================================
+@mainnav-bg                 : #2b313a;
+@mainnav-color              : screen(@mainnav-bg, #999);
+@mainnav-hover-color        : #fff;
+@mainnav-active-bg          : transparent;
+@mainnav-active-color       : #fff;
+@mainnav-active-state       : darken(@state-active-bg, 15%);
+
+@mainnav-lg-width           : 250px;
+@mainnav-sm-width           : 55px;
+
+
+
+// Reduce the file size by disabling features that you do not use.
+@mainnav-collapse           : true;
+@mainnav-slide              : true;
+@mainnav-reveal             : true;
+
+
+
+
+
+
+
+
+
+
+
+
+// ASIDE
+//============================================
+@aside-width                : @mainnav-lg-width;
+@aside-dark-bg              : lighten(@mainnav-bg,5%);
+@aside-dark-color           : #fff;
+@aside-bright-bg            : #fff;
+@aside-bright-color         : #404040;
+
+
+
+
+
+
+
+
+
+
+
+// FOOTER
+//============================================
+@footer-bg                  : @mainnav-bg;
+@footer-color               : @mainnav-hover-color;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ANIMATION
+//============================================
+@enable-animation           : true;
+@enable-easeInQuart         : true;
+@enable-easeOutQuart        : true;
+@enable-easeInBack          : true;
+@enable-easeOutBack         : true;
+@enable-easeInOutBack       : true;
+@enable-steps               : true;
+@enable-jumping             : true;
+@enable-rubber              : true;
+
+
+
+
+//Animation duration
+@ease-duration              : .35s;
+@easeInQuart                : .35s;
+@easeOutQuart               : .4s;
+@easeInBack                 : .35s;
+@easeOutBack                : .35s;
+@easeInOutBack              : .5s;
+@steps                      : .5s;
+@jumping                    : .7s;
+@rubber                     : .5s;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// COMPONENT
+//============================================
+@state-active-bg            : #3d8eb9;
+@state-active-color         : #fff;
+
+
+
+// Reduce the file size by disabling the color of the components that you do not use.
+@enable-mint                : true;
+@enable-purple              : true;
+@enable-pink                : true;
+@enable-dark                : true;
+
+
+
+
+
+@light-bg                   : #fff;
+@gray-bg                    : #e3e8ee;
+@primary-bg                 : #458fd2;
+@info-bg                    : #3bb5e8;
+@success-bg                 : #8cc152;
+@warning-bg                 : #feab34;
+@danger-bg                  : #e9573f;
+@mint-bg                    : #19b698;
+@purple-bg                  : #9365B8;
+@pink-bg                    : #EB72B6;
+@dark-bg                    : #3b3e46;
+
+
+
+
+
+@text-muted                 : lighten(@body-color,30%);
+@light-color                : #404040;
+@gray-color                 : #404040;
+@primary-color              : #fff;
+@info-color                 : #fff;
+@success-color              : #fff;
+@warning-color              : #fff;
+@danger-color               : #fff;
+@mint-color                 : #fff;
+@purple-color               : #fff;
+@pink-color                 : #fff;
+@dark-color                 : #fff;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// OVERWRITE BOOTSTRAP COMPONENT
+//============================================
+
+
+//Disable components that you do not use.
+@table                      : true;
+@form-control               : true;
+@nav-pills                  : true;
+@list-group                 : true;
+@label                      : true;
+@badge                      : true;
+@breadcrumb                 : true;
+@alert                      : true;
+@modal                      : true;
+@tooltip                    : true;
+@popover                    : true;
+@dropdown                   : true;
+@well                       : true;
+@progressbar                : true;
+@pager                      : true;
+@pagination                 : true;
+@carousel                   : true;
+@accordion                  : true;
+@tabs                       : true;
+@bg                         : true;
+@txt                        : true;
+
+
+@buttons                    : true;
+
+// Activeit comes with a variety of buttons. Please disable if you do not use.
+
+@include-btn-hover          : true;
+@include-btn-active         : true;
+@include-btn-labeled        : true;
+@include-btn-circle         : true;
+@include-btn-icon           : true;
+@include-btn-rounded        : true;
+
+
+
+
+
+
+@table-border-color         : rgba(0,0,0,0.03);
+@tooltip-bg                 : #1c1e21;
+@state-success              : darken(@success-bg,20%);
+@state-warning              : darken(@warning-bg,20%);
+@state-danger               : darken(@danger-bg,20%);
+
+
+
+
+
+
+
+@panels                     : true;
+@panel-heading-height       : 59px;
+@panel-w-tabs               : true;
+@panel-w-progressbar        : true;
+@panel-w-pagination         : true;
+@panel-w-pager              : true;
+@panel-w-btn                : true;
+
+
+
+
+
+// EXTRA
+//============================================
+@megamenu					: true;
+
+@timeline                   : true;
+@timeline-bg                : @light-bg;
+@timeline-color             : @light-color;
+
+
+
+@email                      : true;
+@email-list-odd             : rgba(0, 66, 78, 0.05);
+@email-list-hover           : rgba(0, 66, 78, 0.065);
+@email-highlight            : #f2ee8d;
+@email-stared-color         : #ffa100;
+@email-stared-hover         : lighten(@email-stared-color,15%);
+@email-unstared-color       : @text-muted;
+
+
+
+
+
+@form-wizard                : true;
+@include-form-wizard-classic: true;
+@include-form-wizard-steps  : true;
+
+
+
+
+
+
+
+// EXCLUSIVE PLUGIN STYLESHEET
+//============================================
+@activeit-scrollTop             : true;
+@activeit-language-selector     : true;
+@activeit-overlay               : true;
+@activeit-noty                  : true;
+@activeit-check                 : true;
+@activeit-check-bg              : #fff;
+@activeit-check-color           : #404040;
+@activeit-check-border          : #c1c1c1;
+@activeit-check-border-radius   : 2px;
+
+
+
+
+
+
+.transition(@prop,@times) {
+	-webkit-transition: @prop @times;
+	transition: @prop @times;
+}
+

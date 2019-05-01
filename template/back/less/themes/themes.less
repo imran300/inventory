@@ -1,0 +1,631 @@
+body{
+    color:@body-color;
+}
+
+a{
+    color:@link-color;
+}
+
+
+a:hover, a:focus{
+    color: @link-hover-color
+}
+
+body, #content-container, #navbar, .pace{
+    background-color: @body-bg
+}
+
+
+
+
+
+.page-header {
+    color: lighten(@body-color, 17%);
+}
+
+.searchbox {
+    > .input-group input:focus{
+        border-color: @state-active-bg;
+    }
+}
+
+
+
+.navbar-header{
+    background-color: darken(@brand-bg-overlay, 4%);
+}
+
+.navbar-content{
+    background-color: @navbar-bg;
+}
+
+.navbar-brand{
+    background-color: @brand-bg;
+    &, &:hover, &:focus{
+        color: @brand-color;
+    }
+}
+
+.navbar-top-links {
+    & > li {
+        & > a {
+            color: @navbar-color;
+            &:focus{
+                background-color: transparent;
+            }
+        }
+    }
+}
+.navbar-top-links &>li &>a:hover,
+.navbar-top-links &>.open &>a,
+.navbar-top-links &>.open &>a:focus {
+    background-color: darken(@navbar-bg, 5%);
+    color:@navbar-color;
+}
+.navbar-top-links .tgl-menu-btn &>a,
+.navbar-top-links .tgl-menu-btn &>a:hover,
+.navbar-top-links .tgl-menu-btn &>a:focus {
+    color: @brand-color;
+}
+
+
+
+/*---------------------------------*/
+
+@media (min-width: 768px){
+    .navbar-header{
+        background-color: transparent;
+        &:before{
+            content:'';
+            background-color: @brand-bg-overlay
+        }
+    }
+    #navbar-container{
+        background-color: @navbar-bg
+    }
+    #container.mainnav-in .brand-title,
+    #container.mainnav-sm .brand-title,
+    #container.mainnav-lg .brand-title{
+        color: @brand-color;
+    }
+
+    .navbar-top-links{
+        .tgl-menu-btn{
+            > a, > a:hover, > a:focus{
+                & when(@navbar-color = @brand-color){
+                    &:extend(#container.mainnav-in .brand-title);
+                }
+                & when not (@navbar-color = @brand-color){
+                    color: @navbar-color;
+                }
+            }
+            > a:focus{
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+
+/*======================================*/
+/* MAIN NAVIGATION                      */
+/*======================================*/
+#mainnav-container, #mainnav{
+    background-color: @mainnav-bg;
+    //border-right: 1px solid darken(@mainnav-bg,3%);
+}
+#mainnav .list-header, #mainnav-menu a{
+    color:@mainnav-color
+}
+
+#mainnav-menu > li > a:hover,
+#mainnav-menu > li > a:active {
+    color: @mainnav-hover-color;
+    background-color: darken(@mainnav-bg,2%);
+    box-shadow:inset 4px 0 0 0 lighten(@mainnav-active-state, 3%);
+}
+
+#mainnav-menu{
+    > .active-link{
+        >a, >a:hover{
+            &:extend(#mainnav-menu > li > a:hover);
+        }
+    }
+    > .active-sub {
+        > a, >a:hover{
+            &:extend(#mainnav-menu > li > a:hover);
+            box-shadow: none;
+        }
+    }
+    > li {
+        a.hover{
+            color: @mainnav-hover-color;
+            background-color: lighten(@mainnav-bg, 3%);
+        }
+    }
+    ul{
+        background-color: lighten(@mainnav-bg, 3%);
+        a{
+            &:hover{
+                background-color: @mainnav-bg;
+                color: @mainnav-hover-color;
+                box-shadow:inset 4px 0 0 0 @mainnav-active-state;
+            }
+        }
+        ul{
+            background-color: lighten(@mainnav-bg, 5%);
+            a:hover{
+                background-color: lighten(@mainnav-bg, 2%);
+                color: @mainnav-hover-color;
+            }
+        }
+        .active-link{
+            a{
+                &:extend(#mainnav-menu > li > a:hover);
+                background-color: lighten(@mainnav-bg,1.5%);
+            }
+        }
+    }
+}
+
+.menu-popover{
+    .sub-menu{
+        ul{
+            background-color: darken(@mainnav-bg,1.2%);
+            &:extend(#mainnav-menu ul);
+            a{
+                &:extend(#mainnav-menu ul a);
+                &:hover{
+                    &:extend(#mainnav-menu ul a:hover);
+                }
+            }
+            ul{
+                background-color: darken(@mainnav-bg,2.2%);
+                &:extend(#mainnav-menu ul ul);
+                a:hover{
+                    background-color: darken(@mainnav-bg, 0.7%);
+                    color: @mainnav-hover-color;
+                    box-shadow:inset 4px 0 0 0 @mainnav-active-state;
+                }
+            }
+            .active-link{
+                a{
+                    &:extend(#mainnav-menu ul .active-link a);
+                }
+            }
+        }
+    }
+    .single-content{
+        color: @mainnav-hover-color;
+        background-color: lighten(@mainnav-bg, 3%);
+    }
+}
+
+#container.mainnav-sm{
+    #mainnav-menu{
+        >.active{
+            &-link, &-sub{
+                > a, a:hover{
+                   background-color: @state-active-bg;
+                }
+            }
+        }
+    }
+}
+#mainnav{
+    .list-header{
+        color:darken(@mainnav-color,20%);
+    }
+}
+
+/*======================================*/
+/* MAIN NAVIGATION : SHORTCUT           */
+/*======================================*/
+#mainnav-shortcut{
+    .shortcut-grid{
+        background-color: @mainnav-bg;
+        color: @mainnav-hover-color;
+    }
+}
+
+
+
+/*======================================*/
+ /* MAIN NAVIGATION : WIDGET            */
+/*======================================*/
+.mainnav-widget{
+    color:@mainnav-color;
+}
+
+
+& when (@mainnav-collapse = true){
+    @media (min-width: 768px){
+        #container.mainnav-sm #mainnav-menu .active-link > a,
+        #container.mainnav-sm #mainnav-menu .active-sub > a {
+            color: @mainnav-active-color;
+        }
+        #container.mainnav-sm{
+            #mainnav{
+                .mainnav-widget{
+                    >.show-small{
+                        a{
+                            color:@mainnav-color;
+                            &:hover{
+                                color:@mainnav-hover-color;
+                                box-shadow:inset 4px 0 0 0 @mainnav-active-state;
+                                -webkit-transition: background-color .2s, padding-left .3s, box-shadow .4s;
+                                transition: background-color .2s, padding-left .3s, box-shadow .4s;
+                            }
+                        }
+                    }
+                }
+            }
+            .shortcut-grid:hover{
+                box-shadow:inset 4px 0 0 0 @mainnav-active-state;
+                -webkit-transition: background-color .2s, padding-left .3s, box-shadow .4s;
+                transition: background-color .2s, padding-left .3s, box-shadow .4s;
+            }
+            .shortcut-grid:hover,
+            .popover.mainnav-shortcut{
+                border: 0;
+                background-color: lighten(@mainnav-bg, 3%);
+                color: @mainnav-hover-color;
+            }
+        }
+        /* MAIN NAVIGATION : POPOVER  */
+        /*======================================*/
+        .menu-popover{
+            .sub-menu{
+                ul{
+                    li{
+                        >a{
+                            color:@mainnav-hover-color;
+                        }
+                    }
+                }
+            }
+            &.popover{
+                background-color: lighten(@mainnav-bg, 3%);
+                color:@mainnav-hover-color;
+            }
+            >.popover-title{
+                background-color: lighten(@mainnav-bg, 3%);
+                color:@mainnav-hover-color;
+            }
+            .mainnav-widget-content{
+                background-color: lighten(@mainnav-bg, 3%);
+            }
+        }
+
+        #container.mainnav-sm #mainnav .mainnav-widget .show-small .hover{
+            color: @mainnav-hover-color;
+            background-color: lighten(@mainnav-bg, 3%);
+        }
+
+    }
+
+}
+
+/* OFF CANVAS RESPONSIVE */
+/*======================================*/
+@media (min-width: 768px){
+    #container.mainnav-in.easeInBack #mainnav-container{
+        box-shadow: -20px 0 0 0 @mainnav-bg;
+    }
+    #container.mainnav{
+        &-in{
+            & when (@enable-easeOutBack = true){
+                &.easeOutBack #mainnav-container{
+                    &:extend(#container.mainnav-in.easeInBack #mainnav-container);
+                }
+            }
+            & when (@enable-easeInOutBack = true){
+                &.easeInOutBack #mainnav-container{
+                    &:extend(#container.mainnav-in.easeInBack #mainnav-container);
+                }
+            }
+            & when (@enable-jumping = true){
+                &.jumping #mainnav-container{
+                    &:extend(#container.mainnav-in.easeInBack #mainnav-container);
+                }
+            }
+        }
+        &-out{
+            .brand-title{
+                background-color: transparent;
+                color: @brand-color-overlay;
+            }
+            & when (@enable-easeInBack = true){
+                &.easeInBack #mainnav-container{
+                    &:extend(#container.mainnav-in.easeInBack #mainnav-container);
+                }
+            }
+            & when (@enable-easeOutBack = true){
+                &.easeOutBack #mainnav-container{
+                    &:extend(#container.mainnav-in.easeInBack #mainnav-container);
+                }
+            }
+            & when (@enable-easeInOutBack = true){
+                &.easeInOutBack #mainnav-container{
+                    &:extend(#container.mainnav-in.easeInBack #mainnav-container);
+                }
+            }
+            & when (@enable-jumping = true){
+                &.jumping #mainnav-container{
+                    &:extend(#container.mainnav-in.easeInBack #mainnav-container);
+                }
+            }
+        }
+    }
+}
+
+
+
+/*======================================*/
+/* ADDITIONAL SIDEBAR */
+/*======================================*/
+#container {
+    #aside-container{
+        background-color: @aside-bright-bg;
+        .nav-tabs{
+            li:not(active){
+                a{
+                    background-color: darken(@aside-dark-bg,3%);
+                }
+            }
+        }
+    }
+    &.aside-bright{
+        #aside{
+            a:not(.btn){
+                color: @aside-bright-color;
+                &:hover, &:focus{
+                    color: darken(@aside-bright-color,10%);
+                }
+            }
+            .nav-tabs{
+                li:not(.active){
+                    a{
+                        background-color: darken(@aside-bright-bg,5%);
+                    }
+                }
+            }
+        }
+        .btn-link{
+            color: @aside-bright-color;
+        }
+    }
+}
+
+#aside{
+    background-color: @aside-dark-bg;
+    color: @aside-dark-color;
+    .bord-all, .bord-top, .bord-btm, .bord-left, .bord-rgt, .bord-hor, .bord-ver, .list-divider{
+        border-color:lighten(@aside-dark-bg,3%);
+    }
+    .btn-link{
+        color: @aside-dark-color;
+    }
+    .text-muted{
+        color: lighten(@aside-dark-bg,35%);
+    }
+}
+
+
+/* ADDITIONAL SIDEBAR : RESPONSIVE LAYOUT */
+/*======================================*/
+
+@media (min-width: 768px){
+    #container{
+        #aside-container{
+            background-color: @aside-bright-bg;
+        }
+    }
+}
+
+
+/* ADDITIONAL SIDEBAR : TOGGLE COLOR */
+/*======================================*/
+
+#container{
+    &.aside-bright{
+        #aside{
+            background-color: @aside-bright-bg;
+            border-color: darken(@aside-bright-bg, 5%);
+            color: #333;
+            border-left: 1px solid darken(@aside-bright-bg, 5%);
+            .text-light{
+                color : @body-color;
+            }
+            .text-muted{
+                color : lighten(@body-color,30%);
+            }
+            .bord-all, .bord-top, .bord-btm, .bord-lft, .bord-rgt, .bord-hor, .bord-ver, .list-divider{
+                border-color: darken(@aside-bright-bg, 3%);
+            }
+            .list-group .list-header, .text-muted{
+                color: @text-muted;
+            }
+            .progress{
+                background-color: darken(@aside-bright-bg, 10%);
+            }
+        }
+        &.aside-left{
+            #aside{
+                border-right: 1px solid darken(@aside-bright-bg, 3%);
+            }
+        }
+
+    }
+
+}
+
+
+/*======================================*/
+/* PAGER */
+/*======================================*/
+& when (@pager = true) {
+    .pager{
+        li{
+            >a{
+                &:hover,&:focus{
+                    background-color: @light-bg;
+                    border-color: @state-active-bg;
+                    color: @state-active-bg;
+                    box-shadow: inset 0 0 1px @state-active-bg;
+                }
+            }
+        }
+    }
+}
+
+/*======================================*/
+/* PAGINATION */
+/*======================================*/
+& when (@pagination = true){
+    .pagination{
+        >li{
+            a {
+                &:hover,&:focus{
+                    & when (@pager = false) {
+                        background-color: @light-bg;
+                        border-color: @state-active-bg;
+                        color: @state-active-bg;
+                        box-shadow: inset 0 0 1px @state-active-bg;
+                    }
+                    & when (@pager = true) {
+                        &:extend(.pager li > a:hover);
+                    }
+                }
+            }
+        }
+        >.active{
+            >a, >span, >a:hover, >span:hover, >a:focus, >span:focus{
+                background-color:@state-active-bg;
+                border-color: @state-active-bg;
+            }
+        }
+    }
+}
+
+
+
+/*======================================*/
+ /* DROPDOWN */
+/*======================================*/
+& when (@dropdown = true) {
+    .dropdown{
+        &-menu{
+            >li{
+                >a{
+                    padding:5px 10px;
+                    &:hover{
+                        background-color: @state-active-bg;
+                        color: @state-active-color
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+& when (@activeit-check = true){
+    /* Checkbox & Radio default
+    *==================================================*/
+    .form-checkbox.form-normal:not(.disabled):hover:before,
+    .form-radio.form-normal:not(.disabled):hover:before{
+        border-color: @state-active-bg;
+    }
+}
+
+
+& when (@list-group = true) {
+    .list-group-item.active,
+    .list-group-item.active:hover,
+    .list-group-item.active:focus,
+    .list-group-transparent .list-group-item.active,
+    .list-group-transparent .list-group-item.active:hover,
+    .list-group-transparent .list-group-item.active:focus{
+        background-color: @state-active-bg;
+        border-color: @state-active-bg;
+        color: @state-active-color;
+    }
+    .list-group-item.active .list-group-item-text,
+    .list-group-item.active:hover .list-group-item-text,
+    .list-group-item.active:focus .list-group-item-text{
+        color: @state-active-color;
+    }
+}
+
+/*======================================*/
+/* TAB */
+/*======================================*/
+& when (@tabs = true){
+    .tab{
+        &-base{
+            .nav-tabs{
+                >li:not(.active){
+                    >a{
+                        &:hover{
+                            border-color: @state-active-bg;
+                            border-bottom-color: transparent;
+                        }
+                    }
+                }
+            }
+        }
+        &-footer:after{
+            content:'';
+            display: table;
+            clear: both
+        }
+    }
+    .tab{
+        &-stacked{
+            &-left{
+                &.tab-base{
+                    .nav-tabs{
+                        >li:not(.active){
+                            a{
+                                &:hover{
+                                    &:extend(.tab-stacked-left.tab-base .nav-tabs > li:not(.active) a:hover);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &-right{
+                &.tab-base{
+                    .nav-tabs{
+                        >li:not(.active){
+                            a{
+                                &:hover{
+                                    border-color: @state-active-bg;
+                                    border-left-color: transparent;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.nano > .nano-pane > .nano-slider{
+    background-color: @state-active-bg;
+}
+
+#container.footer-fixed{
+    #footer{
+        background-color: @footer-bg;
+        color:@footer-color;
+    }
+}
+
+.pace-running .pace .pace-progress,
+.pace-running .pace .pace-activity {
+    background-color: darken(@state-active-bg, 10%);
+}

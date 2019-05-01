@@ -1,0 +1,52 @@
+/*======================================*/
+/* FOOTER */
+/*======================================*/
+#footer{
+    
+    border-top: rgba(0, 0, 0, 0.07);
+    position: absolute;
+    padding-top: 12px;
+    bottom: 0;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    height: 50px;
+    p{
+        margin-bottom: 5px;
+    }
+    .show-fixed{
+        display: none;
+    }
+    .hide-fixed{
+        display: block;
+        height: 100%
+    }
+}
+
+
+.footer-list{
+    margin-bottom: 0;
+    > li{
+        vertical-align: top
+    }
+}
+
+
+#container.footer-fixed{
+    #footer{
+        background-color: @footer-bg;
+        color:@footer-color;
+        left: 0;
+        position: fixed;
+        bottom: 0;
+        margin-top:-50px;
+        z-index: 1;
+        .hide-fixed{
+            &:extend(#footer .show-fixed);
+        }
+        .show-fixed{
+            &:extend(#footer .hide-fixed);
+        }
+    }
+}
+

@@ -1,0 +1,330 @@
+/*====================================*/
+/* TOP NAVIGATION BAR
+/*====================================*/
+#navbar{
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    background-color: @body-bg;
+    left: 0;
+    top:0
+}
+#navbar-container{
+    box-shadow: 0 2px 0px -1px rgba(0,0,0,.07);
+}
+.navbar-header{
+    left: 0;
+    position: relative;
+    float:none;
+    background-color: @mainnav-bg;
+}
+
+.navbar-content{
+    position: relative;
+    left:0;
+    background-color: @navbar-bg;
+    padding: 0 8px;
+
+}
+@media (min-width: 992px){
+    .navbar-content{
+        padding:0 13px;
+    }
+}
+
+
+/*====================================*/
+/* BRAND LOGO & TEXT
+/*====================================*/
+.navbar-brand{
+    background-color: @brand-bg;
+    color: @mainnav-hover-color;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    width: @mainnav-lg-width
+}
+
+.navbar-brand:hover, .navbar-brand:focus{
+    color: @mainnav-hover-color
+}
+
+.brand-icon{
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+
+.brand-text{
+    display: block;
+    font-size: @brand-font-size;
+    font-weight: 500
+}
+
+.brand-icon, .brand-title{
+    display: block;
+    line-height: 50px;
+}
+
+
+
+/*======================================*/
+/* TOP NAVBAR ICON & BUTTON */
+/*======================================*/
+.navbar-top-links{
+    > li{
+        float:left;
+        > a {
+            display: table-cell;
+            padding:0 12px;
+            vertical-align: middle;
+            height: 50px;
+            color: @navbar-color;
+            .transition(all,.3s);
+            a:focus{
+                background-color: transparent;
+            }
+        }
+        > a:hover{
+            background-color: darken(@navbar-bg, 5%);
+            color: darken(@navbar-color,15%);
+            .transition(all,.3s);
+        }
+    }
+    > .open{
+        > a, > a:focus{
+            background-color: darken(@navbar-bg, 5%);
+            color:@navbar-color;
+            .transition(all,.3s);
+        }
+        > a{
+            .badge{
+                background-color: @primary-bg;
+            }
+        }
+    }
+    .dropdown-menu{
+        margin-top: 10px;
+        .panel-body{
+            padding: 0;
+        }
+        .nano:not(.scrollable){
+            max-height: 180px;
+            .nano-content{
+                position: static;
+            }
+        }
+    }
+    .tgl-menu-btn{
+        position: absolute;
+        top:-100%;
+        right: 0;
+        > a, > a:hover, > a:focus{
+            color: @mainnav-color
+        }
+        > a:hover, a:focus{
+            background-color: transparent
+        }
+    }
+    .head-list{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li{
+            a{
+                display: block;
+                padding:10px 15px;
+                color:rgba(0,0,0,.6);
+                background: transparent;
+                &:hover{
+                    color:rgba(0,0,0,1);
+                    background: rgba(0,0,0,.065);
+                }
+            }
+        }
+    }
+}
+.badge-header{
+    position: absolute;
+    font-weight: normal;
+    top:10px;
+    right:5px
+}
+
+/* DROPDOWN USER */
+/*======================================*/
+.img-user{
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+.username{
+    float: right;
+    white-space: nowrap;
+    height: 100%;
+    line-height: 47px;
+    margin: 0 10px
+}
+
+#dropdown-user {
+    > .dropdown-toggle{
+        padding-right: 8px;
+        .list-group{
+            margin-bottom: 0;
+            > li{
+                display: block;
+                margin-bottom: -1px;
+                position: relative;
+                a{
+                    display: block;
+                }
+            }
+        }
+    }
+    .panel-title{
+        margin-bottom: 7px;
+    }
+}
+
+/* NAVBAR RESPONSIVE */
+/*======================================*/
+@media (min-width: 768px){
+    #navbar{
+        background-color: transparent
+    }
+
+    .navbar-header{
+        float:left;
+        background-color: transparent;
+        &:before{
+            content:'';
+            position: absolute;
+            width: 100%;
+            height: 50px;
+            background-color: @brand-bg-overlay
+        }
+    }
+
+    #container.mainnav-out{
+        .navbar-header:before{
+            width: 0;
+        }
+    }
+
+    #container.mainnav-in{
+        .navbar-header:before{
+            width: 100%;
+        }
+    }
+
+
+    #navbar-container{
+        background-color: @navbar-bg
+    }
+
+
+    .navbar-content{
+        margin-left: @mainnav-lg-width;
+        background-color: transparent
+    }
+
+
+
+    #navbar .brand-title{
+        padding: 0 1.5em 0 55px;
+    }
+
+    #container.mainnav-in .navbar-brand,
+    #container.mainnav-lg .navbar-brand,
+    #container.mainnav-in .brand-title,
+    #container.mainnav-lg .brand-title{
+        width: @mainnav-lg-width;
+    }
+
+    #container.mainnav-in .brand-icon,
+    #container.mainnav-sm .brand-icon,
+    #container.mainnav-lg .brand-icon{
+        background-color: transparent
+    }
+
+    #container.mainnav-in .brand-title,
+    #container.mainnav-sm .brand-title,
+    #container.mainnav-lg .brand-title{
+        color: @brand-color;
+    }
+
+
+    #container.effect .brand-icon{
+        .transition(background-color, .35s)
+    }
+
+
+    #container.effect .brand-title,
+    #container.effect.mainnav-in .brand-title,
+    #container.effect.mainnav-sm .brand-title,
+    #container.effect.mainnav-lg .brand-title{
+        .transition(color, .35s)
+    }
+
+    .navbar-middle{
+        position: static
+    }
+
+    .navbar-top-links{
+        .tgl-menu-btn{
+            position: static;
+            > a, > a:hover{
+                color: @navbar-color
+            }
+            > a:focus{
+                background-color: transparent;
+                color:@navbar-color;
+            }
+        }
+    }
+}
+
+/*======================================*/
+/* NAVBAR : FIXED */
+/*======================================*/
+
+#container.navbar-fixed{
+    > #navbar{
+        position: fixed;
+        .shadow{
+            box-shadow:1px 0 5px rgba(0,0,0,.3)
+        }
+    }
+    .navbar-top-links{
+        .dropdown-menu{
+            .nano{
+                > .nano-content{
+                    position: absolute;
+                }
+            }
+            .nano{
+                max-height: 110px
+            }
+        }
+    }
+}
+
+.navbar-top-links .dropdown-menu .nano{
+    max-height: 265px
+}
+
+@media (min-height: 480px){
+    #container.navbar-fixed .navbar-top-links .dropdown-menu .nano,
+    .navbar-top-links .dropdown-menu .nano{
+        max-height: 265px
+    }
+}
+
+@media (min-height: 600px){
+    #container.navbar-fixed .navbar-top-links .dropdown-menu .nano,
+    .navbar-top-links .dropdown-menu .nano{
+        max-height: 300px;
+    }
+}
