@@ -59,6 +59,7 @@ class Users extends MY_Controller
         $email = $this->input->post('u_email');
         $password = $this->input->post('u_password');
         $login = $this->User->AuthLogin($email, $password);
+
         if ($login) {
 
             //DEFINE, VARIABLES IN SESSIONS.................
