@@ -18,6 +18,8 @@ if (!defined('BASEPATH'))
  * @property User User
  * @property General General
  * @property Main_model Main_model
+ * @property CI_Input input
+ * @property CI_URI uri
  */
 //Extending all Controllers from Core Controller (MY_Controller)
 class Users extends MY_Controller
@@ -128,7 +130,7 @@ class Users extends MY_Controller
         $user_no = $MaxGroup + 1;
         $dt = date("Y-m-d H:i:s");
         $userid = $this->session->userdata('user_id');
-        $password = SHA1($this->input->post('password'));
+        $password = sha1(md5($this->input->post('password')));
         $username = $this->input->post('username');
         $data_user = array(
 
@@ -233,7 +235,7 @@ class Users extends MY_Controller
         $data = array(
             'USER_ID' => $user_no,
             'USER_NAME' => $user_name,
-            'U_PASSWORD' => sha1($password),
+            'U_PASSWORD' => sha1(md5($password)),
             'EMP_NO' => $maxEmp->EMP_ID,
             'GROUP_ID' => 2,
             'IS_ACTIVE' => 0,
@@ -261,75 +263,40 @@ class Users extends MY_Controller
         $time = date("Y-m-d H:i:s");
 
 
-        $old_pass = sha1($this->input->post('old_pass')); // ab perfect ha acha sabr chor ,mouse sabko krta hun
-        $new_pass = sha1($this->input->post('new_pass'));
-        $new_pass2 = sha1($this->input->post('new_pass2'));
+        $old_pass = sha1(md5($this->input->post('old_pass'))); // ab perfect ha acha sabr chor ,mouse sabko krta hun
+        $new_pass = sha1(md5($this->input->post('new_pass')));
+        $new_pass2 = sha1(md5($this->input->post('new_pass2')));
 
-        if ($this->session->userdata('group_id') == 17) {
-            $check_old_pass = "SELECT `PASSWORD` FROM `usr_usernew` WHERE `USERID` = $userid";
-            $check_cout = $this->General->fetch_CoustomQuery($check_old_pass);
-            foreach ($check_cout as $check) {
-                $count = $check->PASSWORD;
-            }
-
-
-            if ($new_pass == $new_pass2) {
-                if ($count == $old_pass) {
-                    $tbl = "usr_usernew";
-                    $update = array(
-                        "PASSWORD" => $new_pass
-                    );
-                    $where = array(
-                        "USERID" => $userid
-                    );
-                    $this->General->update_record($update, $where, $tbl);
-                    $msg = "Password Changed Successfully. Please Login again with your new password.";
-                    $this->General->set_msg($msg, 1);
-                    redirect(base_url() . "index.php/Users/chage_password");
-                } else {
-                    $msg = "Password cannot be changed. Old password does not match with existing password.";
-                    $this->General->set_msg($msg, 2);
-                    redirect(base_url() . "index.php/Users/chage_password");
-                }
+        $check_old_pass = "SELECT `U_PASSWORD` FROM `usr_user` WHERE `USER_ID` = $userid";
+        $check_cout = $this->General->fetch_CoustomQuery($check_old_pass);
+        foreach ($check_cout as $check) {
+            $count = $check->U_PASSWORD;
+        }
+        if ($new_pass == $new_pass2) {
+            if ($count == $old_pass) {
+                $tbl = "usr_user";
+                $update = array(
+                    "U_PASSWORD" => $new_pass,
+                    "UPDATED_USERID" => $userid,
+                    "UPDATED_DATE" => $time
+                );
+                $where = array(
+                    "USER_ID" => $userid
+                );
+                $this->General->update_record($update, $where, $tbl);
+                $msg = "Password Changed Successfully. Please Login again with your new password.";
+                $this->General->set_msg($msg, 1);
+                redirect(base_url() . "index.php/Users/change_password");
             } else {
-
-                $msg = "Password cannot be changed. Please enter a valid new password twice.";
+                $msg = "Password cannot be changed. Old password does not match with existing password.";
                 $this->General->set_msg($msg, 2);
-                redirect(base_url() . "index.php/Users/chage_password");
+                redirect(base_url() . "index.php/Users/change_password");
             }
         } else {
 
-            $check_old_pass = "SELECT `U_PASSWORD` FROM `usr_user` WHERE `USER_ID` = $userid";
-            $check_cout = $this->General->fetch_CoustomQuery($check_old_pass);
-            foreach ($check_cout as $check) {
-                $count = $check->U_PASSWORD;
-            }
-            if ($new_pass == $new_pass2) {
-                if ($count == $old_pass) {
-                    $tbl = "usr_user";
-                    $update = array(
-                        "U_PASSWORD" => $new_pass,
-                        "UPDATED_USERID" => $userid,
-                        "UPDATED_DATE" => $time
-                    );
-                    $where = array(
-                        "USER_ID" => $userid
-                    );
-                    $this->General->update_record($update, $where, $tbl);
-                    $msg = "Password Changed Successfully. Please Login again with your new password.";
-                    $this->General->set_msg($msg, 1);
-                    redirect(base_url() . "index.php/Users/change_password");
-                } else {
-                    $msg = "Password cannot be changed. Old password does not match with existing password.";
-                    $this->General->set_msg($msg, 2);
-                    redirect(base_url() . "index.php/Users/change_password");
-                }
-            } else {
-
-                $msg = "Password cannot be changed. Please enter a valid new password twice.";
-                $this->General->set_msg($msg, 2);
-                redirect(base_url() . "index.php/Users/chage_password");
-            }
+            $msg = "Password cannot be changed. Please enter a valid new password twice.";
+            $this->General->set_msg($msg, 2);
+            redirect(base_url() . "index.php/Users/chage_password");
         }
     }
 
@@ -346,7 +313,7 @@ class Users extends MY_Controller
         foreach ($check_cout as $check) {
             $count = $check->USER_NAME;
         }
-        $pass = sha1($count);
+        $pass = sha1(md5($count));
         $tbl = "usr_user";
         $update = array(
             "U_PASSWORD" => $pass,
