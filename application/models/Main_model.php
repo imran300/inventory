@@ -1,5 +1,14 @@
 <?php
 
+
+/*
+ *	@author : Imran Shah
+ *  @support: shahmian@gmail.com
+ *	date	: 18 October, 2017
+ *	Kandi Inventory Management System
+ *	http://kelextech.com
+ *  version: 1.0
+ */
 class Main_model extends MY_Model
 {
 

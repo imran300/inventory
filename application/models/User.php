@@ -3,12 +3,13 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+
 /*
- *	@author : BEB300
- *  @support: support@beb300.com
+ *	@author : Imran Shah
+ *  @support: shahmian@gmail.com
  *	date	: 18 October, 2017
- *	Kandi User Management System
- *	http://www.beb300.com
+ *	Kandi Inventory Management System
+ *	http://kelextech.com
  *  version: 1.0
  */
 
@@ -23,8 +24,8 @@ class User extends CI_Model
     // auth login
     public function AuthLogin($email, $password)
     {
-        $pass =  sha1(md5($password));
-       // echo $pass;
+        $pass = sha1(md5($password));
+        // echo $pass;
 
         //$pass = sha1($password);
         $this->db->select("*");
@@ -33,7 +34,7 @@ class User extends CI_Model
         $this->db->where('U_PASSWORD', $pass);
         $this->db->where('IS_ACTIVE', '1');
         $query = $this->db->get();
-       // echo $this->db->last_query();
+        // echo $this->db->last_query();
         return $query->first_row('array');
     }
 

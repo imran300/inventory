@@ -9,6 +9,7 @@ if (!defined('BASEPATH'))
 *  @support: shahmian@gmail.com
 *	date	: 18 April, 2018
 *	Kandi Inventory Management System
+ * website: kelextech.com
 *  version: 1.0
 */
 /**

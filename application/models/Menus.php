@@ -5,13 +5,12 @@ if (!defined('BASEPATH'))
 
     exit('No direct script access allowed');
 
-
 /*
- *	@author : BEB300
- *  @support: support@beb300.com
+ *	@author : Imran Shah
+ *  @support: shahmian@gmail.com
  *	date	: 18 October, 2017
- *	Kandi User Management System
- *	http://www.beb300.com
+ *	Kandi Inventory Management System
+ *	http://kelextech.com
  *  version: 1.0
  */
 
