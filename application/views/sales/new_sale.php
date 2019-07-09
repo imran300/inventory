@@ -90,8 +90,16 @@
                             <tbody id="rows-list">
                             <tr>
                                 <td class="product-list">
-                                    <input type="text" name="product_id[]" class="form-control product">
-
+                                 
+<select class="form-control product input-xlarge" name="product_id[]"
+                            onchange="return get_purchased_data(this.value);">
+                        <option value="">Add Product</option>
+                        <?php foreach ($products as $rows) :
+                            ?>
+                            <option value="<?= $rows->item_id; ?>"><?= $rows->item_name; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                                 </td>
                                 <td><input type="number" name="av_qtys[]" class="form-control stock" readonly>
                                     <input type="hidden" name="category_id[]" class="form-control category" readonly>
