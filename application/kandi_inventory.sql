@@ -539,7 +539,7 @@ CREATE TABLE `usr_user` (
 
 /*Data for the table `usr_user` */
 
-INSERT  INTO `usr_user` VALUES (1,'superadmin','d033e22ae348aeb5660fc2140aec35850c4da997','0',NULL,'1',1,NULL,NULL,NULL,'2017-08-08',1),(2,'sameer','d033e22ae348aeb5660fc2140aec35850c4da997','1',NULL,'1',2,NULL,'2015-03-16',1,'2015-09-11',0),(4,'sohail','202cb962ac59075b964b07152d234b70','3',NULL,'1',3,NULL,'2016-08-03',1,NULL,NULL),(5,'0','bb589d0621e5472f470fa3425a234c74b1e202e8','0',NULL,'1',0,NULL,'2018-05-11',1,NULL,NULL);
+INSERT  INTO `usr_user` VALUES (1,'superadmin','90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad','0',NULL,'1',1,NULL,NULL,NULL,'2017-08-08',1),(2,'sameer','90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad','1',NULL,'1',2,NULL,'2015-03-16',1,'2015-09-11',0),(4,'sohail','202cb962ac59075b964b07152d234b70','3',NULL,'1',3,NULL,'2016-08-03',1,NULL,NULL),(5,'0','bb589d0621e5472f470fa3425a234c74b1e202e8','0',NULL,'1',0,NULL,'2018-05-11',1,NULL,NULL);
 
 /*Table structure for table `vendor` */
 
