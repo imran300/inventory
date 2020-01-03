@@ -266,7 +266,7 @@ class generals extends MY_Controller
         extract($_POST);
         $group_id = $this->input->post('group_id');
 
-        $menus = $this->menus->fetch_permission_navi();
+        $menus = $this->Menus->fetch_permission_navi();
 
         foreach ($menus as $menus) {
 
