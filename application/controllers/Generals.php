@@ -511,6 +511,74 @@ class generals extends MY_Controller
             }
         }
     }
-}
+    
+	/*===== DEFAULT BACKUP VIEW ======*/
+	public function backup()
+	{
+		$data['bkups'] = directory_map('./backups/', 1);
+		$data['pageTitle'] = 'Backup Database';
+		$this->header('Backups');
+		$this->load->view("generals/backups", $data);
+		$this->footer();
+	}//--End of Function backup()
 
-?>
+	/*===== CREATE BACKUP =====*/
+	public function create_backup()
+	{
+		$result = $this->db->query("SHOW TABLE STATUS")->result();
+		$tableinfo = array();
+		$totalsize = 0;
+		$totalrows = 0;
+		foreach ($result as $res) {
+			$size = round($res->Data_length / 1000, 2);
+			$totalsize += $size;
+			$totalrows += $res->Rows;
+			$tableinfo['all'][] = (object)array("name" => $res->Name, "size" => $size . " KB", "rows" => $res->Rows);
+		}
+		$tableinfo['totalSize'] = round(($totalsize / 1000), 2) . " MB";
+		$tableinfo['totalRows'] = $totalrows;
+		$data['dbtables'] = $tableinfo;
+		$this->header('Database Backup');
+		$this->load->view("generals/create_backup", $data);
+		$this->footer();
+	}//--End of Function create_backup()
+	/*===== CREATE BACKUP BUTTON ACTION =====*/
+	public function create_backup_action()
+	{
+		$getbackup = $this->input->post('getbackup');
+		if (!empty($getbackup)) {
+			$tables = $this->input->post('dbtables');
+			if (empty($tables)) {
+				echo json_encode(array("msg_type" => "error", "message" => "Please Select Table for Backup"));
+			} else {
+				$this->getBackup($tables);
+			}
+		}
+	}//-- End of Function create_backup_action()
+
+	/*===== GET BACKUP FILE AND SEND SUCCESS MESSAGE ======*/
+	public function getBackup($tables)
+	{
+		$this->load->dbutil();
+		$prefs = array(
+			'tables' => $tables,
+			'format' => 'txt',
+			'filename' => 'my_db_backup.sql'
+		);
+		$backup = $this->dbutil->backup($prefs);
+		$db_name = 'backup-on-' . date("Y-m-d-H-i-s") . '.sql';
+		$save = 'backups/' . $db_name;
+		$this->load->helper('file');
+		write_file($save, $backup);
+		$redirect_link = base_url('Generals/backup');
+		echo json_encode(array("msg_type" => "success", "message" => "Backup Created Successfully", 'redirect_link' => $redirect_link));
+	}//-- End of Function getBackup()
+	/*===== DOWNLOAD BACKUP FILE OF YOUR DATABASE ======*/
+	function download()
+	{
+		$file = $this->input->get('backup');
+		$sql = file_get_contents('backups/' . $file);
+		$this->load->helper('download');
+		force_download($file, $sql);
+	}//-- End of Function download()
+}
