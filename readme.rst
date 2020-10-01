@@ -7,7 +7,7 @@ but for now, it can be used and any one can customized it for their needs.
 
 UPCOMING FEATURES: 
 
-Database Backup
+Database Backup (Done)
 Sales Return
 Purchase Return
 Profit & Loss Statement
