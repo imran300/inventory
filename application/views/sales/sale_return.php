@@ -1,180 +1,96 @@
+<?php foreach ($sale_main as $item) { ?>
+	<input type="hidden" value='<?= $item['company_id'] ?>' name="supplierID" id="supplierID">
+	<input type="hidden" value='<?= $item['grand_total'] ?>' name="total_sale" id="total_sale">
+<?php } ?>
+<table class="table">
+	<thead>
+	<tr>
+		<th>Item Name</th>
+		<th>Sale Qty</th>
+		<th>Unit Price</th>
+		<th>Return Qunatity</th>
+	</tr>
+	</thead>
+	<tbody>
+	<?php if (!empty($sale_details)): foreach ($sale_details as $sdetails): ?>
+		<?php
+		if ($sdetails["sales_qty"] > getSalesReturn($sdetails['sales_no'],$sdetails['sales_id'])) {
+
+			?>
+			<tr>
+				<td><?= $sdetails['item_name']; ?></td>
+				<td><?= $sdetails['sales_qty'] - getSalesReturn($sdetails['sales_no'],$sdetails['sales_id']); ?></td>
+				<td><?= $sdetails['sales_rate']; ?></td>
+				<td><input type="text" class="form-control m-input" name="ReturnQuantity_<?= $sdetails['sales_id']; ?>"
+						   id="ReturnQuantity_<?= $sdetails['sales_id']; ?>">
+					<button type="button" class="btn btn-info" onclick="returnQty(<?= $sdetails['sales_id']; ?>)"
+							name="return_<?= $sdetails['sales_id'] ?>" id="return_<?= $sdetails['sales_id'] ?>">Return
+					</button>
+				</td>
+			</tr>
+			<input type="hidden" name="item_id_<?= $sdetails['sales_id']; ?>" id="item_id_<?= $sdetails['sales_id']; ?>" value="<?php echo $sdetails['item_id'];?>">
+			<input type="hidden" name="quantity_<?= $sdetails['sales_id']; ?>"
+				   id="quantity_<?= $sdetails['sales_id']; ?>"
+				   value="<?= $sdetails['sales_qty']; ?>">
+			<input type="hidden" name="unit_price_<?= $sdetails['sales_id']; ?>"
+				   id="unit_price_<?= $sdetails['sales_id']; ?>"
+				   value="<?= $sdetails['sales_rate']; ?>">
+			<input type="hidden" name="SaleID" id="SaleID" value="<?= $sdetails['sales_no']; ?>">
+			<input type="hidden" name="sales_id" id="sales_id_<?= $sdetails['sales_id']; ?>"
+				   value="<?= $sdetails['sales_id']; ?>">
+			<?php
+		}
+	endforeach;
+
+	else: ?>
+		<p>Data(s) not available.</p>
+	<?php endif; ?>
+
+	</tbody>
+</table>
+
 <script>
-    $(document).ready(function(){
+	function returnQty(sales_id) {
+		var squantity = $("#quantity_" + sales_id).val();
+		var item_id = $("#item_id_" + sales_id).val();
+		var unit_price = $("#unit_price_" + sales_id).val();
+		var SaleID = $("#SaleID").val();
+		var supplierID = $("#supplierID").val();
+		var total_sale = $("#total_sale").val();
+		var ReturnQuantity = $("#ReturnQuantity_" + sales_id).val();
+		var fd = {
+			sales_id: sales_id,
+			SaleID: SaleID,
+			UnitPrice: unit_price,
+			supplierID: supplierID,
+			ReturnQuantity: ReturnQuantity,
+			total_sale: total_sale,
+			item_id: item_id,
+			squantity: squantity
+		};
+		$.ajax({
+			"url": "<?php echo site_url('Sales/saleReturn')?>",
+			data: fd,
+			type: "POST",
+			success: function (res) {
+				res = $.parseJSON(res);
+				if (res.type === "error") {
+					//$("#status_msg").html(res.response);
+					toastr.error(res.response)
+				} else if (res.type === 'warning') {
+					toastr.warning(res.response);
+				} else if (res.type === 'success') {
+					//$("#status_msg").html(res);
+					toastr.success(res.response);
+					// $("#product_add").modal('hide');
+					$("#myform")[0].reset();
+					// toastr.success(res.response);
 
-        $( "#item" ).autocomplete({
-
-            source: function(request, response) {
-                $.ajax({
-                    url: "<?php echo site_url('sales/autocomplete'); ?>",
-                    data: { name: $("#item").val()},
-                    dataType: "json",
-                    type: "POST",
-                    success: function(data){
-                        //alert(data);
-                        response(data);
-                    }
-                });
-            }
-        });
-    });
-
-    function getSales(cont)
-    {
-        //alert(cont);
-        $.post("<?=base_url();?>sales/display_sales_return/",{salesno:cont},function(page_response)
-//$.post("view/get_inst.php",{inst:cont},function(rep3)
-        {
-            //7alert(page_response);
-
-            $("#display").html(page_response);
-            $("#display").slideDown("slow");
-        });
-    }
-
+				}
+			},
+			error: function (xhr) {
+				$("#status_msg").html("Error: - " + xhr.status + " " + xhr.statusText);
+			}
+		});
+	}
 </script>
-
-<form role="form" method="post" action="<?=base_url(); ?>sales/insert_sales">
-
-
-<div class="row">
-<div class="col-md-3">
-    <!-- begin panel -->
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h4 class="panel-title">Search Product By Sale No</h4>
-        </div>
-        <div class="panel-body" style="height: 100px;">
-
-            <div class="form-group">
-                <div class="col-md-12 col-sm-12">
-
-                    <input type="text" autofocus placeholder="Enter Item name here" onblur="getSales(this.value)" id="item" class="form-control ui-autocomplete-input" name="item" autocomplete="off">
-                </div>
-            </div>
-
-
-
-        </div>
-    </div>
-    <!-- end panel -->
-
-</div>
-
-
-
-</div>
-
-    <div class="row">
-        <div id="display">
-
-        </div>
-    </div>
-
-</form>
-<script>
-
-    function get_product(category_id ) {
-//        alert(category_id);
-        // get the product list
-        $.ajax({
-            url: '<?php echo base_url(); ?>sales/get_sale_product_list/'+ category_id,
-            success: function(response)
-            {
-                $('#product_list_holder').html(response);
-            }
-        });
-
-    }
-
-    total_number = 0;
-    function add_product(product_id) {
-        //if (total_number != 0)
-        //  total_number = 0;
-
-        total_number++;
-
-        // get the product detail
-        $.ajax({
-            url: '<?php echo base_url(); ?>sales/get_selected_product/' +  product_id + '/' + total_number,
-            success: function(response)
-            {
-                jQuery('#invoice_entry_holder').append(response);
-                calculate_grand_total();
-                calculate_change_amount();
-            }
-        });
-    }
-
-    function calculate_grand_total() {
-
-        // calculating subtotal
-        sub_total = 0;
-        for (var i = 1 ; i <= total_number ; i++)
-        {
-            sub_total   +=   Number( $("#single_entry_total_"+ i).val() );
-
-        }
-        $("#sub_total").attr("value" , sub_total);
-
-        // calculating grand total
-        discount_percentage    =   Number( $("#discount_percentage").val() );
-        vat_percentage         =   Number( $("#vat_percentage").val() );
-
-        sub_total              =   sub_total - (sub_total * (discount_percentage / 100));
-        grand_total            =   sub_total + (sub_total * (vat_percentage / 100));
-
-        grand_total            =    grand_total.toFixed(2);
-        $("#grand_total").attr("value" , grand_total);
-        calculate_change_amount();
-    }
-
-
-    function calculate_change_amount() {
-        get_grand_total    =	Number( $("#grand_total").val() );
-        get_payment_amount =	Number( $("#payment").val() );
-
-        if (get_payment_amount > get_grand_total) {
-
-            change_amount      =	get_payment_amount - get_grand_total;
-            change_amount      =	change_amount.toFixed(2);
-            $("#change_amount").attr("value" , change_amount);
-            get_change_amount  =	Number( $("#change_amount").val() );
-            net_payable		   =	get_payment_amount - get_change_amount;
-            net_payable		   =	net_payable.toFixed(2);
-            $("#net_payment").attr("value" , net_payable);
-            $("#due_amount").attr("value" , 0);
-        }
-
-        if (get_payment_amount < get_grand_total) {
-
-            $("#change_amount").attr("value" , 0);
-            $("#net_payment").attr("value" , get_payment_amount);
-            get_due_amount	=	get_grand_total - get_payment_amount;
-            get_due_amount	=	get_due_amount.toFixed(2);
-            $("#due_amount").attr("value" , get_due_amount);
-        }
-
-        if (get_payment_amount == get_grand_total) {
-
-            $("#change_amount").attr("value" , 0);
-            $("#net_payment").attr("value" , get_payment_amount);
-            $("#due_amount").attr("value" , 0);
-        }
-    }
-
-    function calculate_single_entry_total(entry_number) {
-
-        quantity        = $("#single_entry_quantity_"+entry_number).val();
-        selling_price   = $("#single_entry_selling_price_"+entry_number).val();
-
-        single_entry_total = quantity * selling_price;
-        $("#single_entry_total_"+entry_number).val( single_entry_total );
-
-        // on change each single entry, update the grand total area also
-        calculate_grand_total();
-        calculate_change_amount();
-    }
-
-
-</script>
-

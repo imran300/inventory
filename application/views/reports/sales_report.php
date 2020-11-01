@@ -80,6 +80,7 @@
                                 $total_cost = 0;
                                 $total_sell = 0;
                                 $total_profit = 0;
+                                $p = 0;
                                 ?>
                                 <?php if (!empty($invoice_details)): foreach ($invoice_details as $invoice_no => $order_details) : ?>
                                     <?php $total_buying_price = 0; $sales_qty =0; ?>
@@ -100,6 +101,7 @@
                                             <th class="unit text-left">Buying Price</th>
                                             <th class="unit text-left">Selling Price</th>
                                             <th class="qty text-left">Qty</th>
+                                            <th class="qty text-left">Return Qty</th>
                                             <th class="total text-left ">TOTAL</th>
                                         </tr>
                                         </thead>
@@ -118,10 +120,15 @@
                                                 ?>
                                                 <td class="unit"><?php echo number_format($v_order->stock_rate, 2) ?></td>
                                                 <td class="qty"><?php echo $v_order->sales_qty ?></td>
-                                                <td class="total"><?php echo number_format($v_order->sales_amount); ?></td>
+                                                <td class="qty"><?php echo $retn_qty =  getSalesReturn($v_order->sales_no, $v_order->sales_id);
+                                                $price = $retn_qty * $v_order->stock_rate;
+                                                ?></td>
+                                                <td class="total"><?php echo number_format($v_order->sales_amount - $price); ?></td>
                                             </tr>
                                             <?php $k++ ?>
-                                            <?php $total_cost += $v_order->purchase_rate * $sales_qty; ?>
+                                            <?php
+											$total_cost += $v_order->purchase_rate * $sales_qty;
+											$p = $p + $price;?>
 
                                             <?php
                                         endforeach;
@@ -140,16 +147,12 @@
                                             </tr>
                                         <?php endif; ?>
 
-                                        <tr>
+                                       <tr>
                                             <td colspan="3"></td>
                                             <td colspan="2">Grand Total</td>
-                                            <td><?php echo  number_format($order[$key]->grand_total, 2) ?></td>
+                                            <td><?php echo  number_format($order[$key]->grand_total - $p, 2) ?></td>
                                         </tr>
-                                        <tr>
-                                            <td colspan="3"></td>
-                                            <td colspan="2">Profit</td>
-                                            <td><?php echo number_format($order[$key]->grand_total - $t, 2) ?></td>
-                                        </tr>
+
                                         </tfoot>
                                         <?php
                                         $total_sell += $order[$key]->grand_total;
@@ -172,7 +175,7 @@
                                         <tbody style="background-color: #c5c5c5">
                                         <td class="total"><?php echo number_format($total_cost, 2) ?></td>
                                         <td class="total"><?php echo number_format($total_sell, 2) ?></td>
-                                        <td class="total"><?php echo number_format($total_profit, 2) ?></td>
+                                        <td class="total"><?php echo number_format($total_sell - $total_cost, 2) ?></td>
                                         </tbody>
                                     </table>
 

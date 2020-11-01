@@ -273,17 +273,19 @@ WHERE item.item_id=$item_id
         return $query->num_rows();
     }
 
-    // get stock quantity
-    public function get_stock_qty($item, $category)
-    {
-        $this->db->select('*');
-        $this->db->from('stock');
-        $this->db->where('item_id', $item);
-        $this->db->where('category_id', $category);
-        $query = $this->db->get();
-        return $query->row();
+   // get stock quantity
+	public function get_stock_qty($item, $category = '')
+	{
+		$this->db->select('*');
+		$this->db->from('stock');
+		$this->db->where('item_id', $item);
+		if ($category != ''):
+			$this->db->where('category_id', $category);
+		endif;
+		$query = $this->db->get();
+		return $query->row();
 
-    }
+	}
 
     // get all purchases
     public function select_purchases()
@@ -613,7 +615,3 @@ ORDER BY pc.sales_no DESC ")->result();
     }
 
 }
-
-
-?>
-

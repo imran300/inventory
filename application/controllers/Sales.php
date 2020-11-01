@@ -208,4 +208,82 @@ class Sales extends MY_Controller
         $data['amount'] = $this->Main_model->getSale_Details($id);
         $this->load->view('sales/invoice_print', $data);
     }
+    /*==== get sales items for return =====*/
+    function getSalesDataReturn()
+    {
+        $sales_no = $this->input->post('sales_no');
+        $where = array('sales_no' => $sales_no);
+        $data['sale_main'] = $this->General->select_where('sales', $where, 'm');
+        $data['sale_details'] = $this->db->query("SELECT sd.*, p.`item_id`, p.`item_name`
+FROM sales_detail AS sd, item AS p
+ WHERE sd.sales_no =  '$sales_no'
+ AND p.item_id = sd.item_id")->result_array();
+
+        $this->load->view('sales/sale_return', $data);
+    }
+
+    public function saleReturn()
+    {
+        $SDID = $this->input->post('sales_id');
+        $sales_no = $this->input->post('SaleID');
+        $UnitPrice = $this->input->post('UnitPrice');
+        $ReturnQuantity = $this->input->post('ReturnQuantity');
+        $squantity = $this->input->post('squantity');
+        $SCID = $this->input->post('supplierID');
+        $total_sale = $this->input->post('total_sale');
+        $item_id = $this->input->post('item_id');
+        $getTotalSale = $total_sale;
+        $ReturnBalance = ($UnitPrice * $ReturnQuantity);
+        $getTotalSale -= $ReturnBalance;
+        //echo "<pre>";print_r($_POST);exit;
+        // get the sales return records against this sale item and sales no, if exists update else insert
+        $getTotalReturn = $this->db->get_where('sales_return', array('sales_no' => $sales_no, "sales_id" => $SDID));
+        //		echo $this->db->last_query();
+        if ($getTotalReturn->num_rows() > 0) { // record found, so update the return quantity
+            //			echo "here";
+            $return_qty = $getTotalReturn->row()->return_qty;
+            $ReturnQuantity += $return_qty;
+
+            // update the sales return data
+            $this->db->update('sales_return', array('return_qty' => $ReturnQuantity), array('sales_no' => $sales_no, 'sales_id' => $SDID));
+        } else { // no records so insert
+            //			echo "else";
+            $data = array(
+                "sales_no" => $sales_no,
+                "sales_id" => $SDID,
+                //				"sales_date"=> date("Y-m-d"),
+                "return_date" => date("Y-m-d"),
+                "item_id" => $item_id,
+                "sales_qty" => $squantity,
+                "return_qty" => $ReturnQuantity,
+                "sales_amount" => $total_sale,
+                "sales_rate" => $UnitPrice
+            );
+            $this->db->insert('sales_return', $data);
+            //				echo $this->db->last_query();
+        }
+        // get stock quantity for an item
+        $data = $this->Main_model->get_stock_qty($item_id, '');
+        $ids = $data->stock_qty;
+        //echo $ids;exit;
+        // update stock
+
+        $stock = array(
+            "item_id" => $item_id,
+            "stock_qty" => $ids + $ReturnQuantity,
+        );
+        $where_stk = array("item_id" => $item_id);
+        $this->db->update('stock', $stock, $where_stk);
+        if ($this->db->trans_status() == FALSE) {
+            $this->db->trans_rollback();
+            $json = array("type" => "error", "response" => 'Their was some error. Please try again.');
+            header("application/json");
+            echo json_encode($json);
+        } else {
+            $this->db->trans_commit();
+            $json = array("type" => "success", "response" => 'Record Added Successfully');
+            header("application/json");
+            echo json_encode($json);
+        }
+    }
 }
