@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
  *	Kandi Inventory Management System
- * website: kelextech.com
+ * website: phptiger.com
  *  version: 1.0
  */
 
@@ -28,7 +28,6 @@ class Users extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-
     }
 
     /*
@@ -39,7 +38,6 @@ class Users extends MY_Controller
     {
 
         $this->load->view('users/login');
-
     }
 
     /*
@@ -50,7 +48,6 @@ class Users extends MY_Controller
     {
 
         $this->User->logout();
-
     }
 
     /*
@@ -85,13 +82,10 @@ class Users extends MY_Controller
             if ($login['GROUP_ID'] == 1) {
 
                 redirect(base_url() . 'index.php/Dashboard');
-
             } else {
 
                 redirect(base_url() . 'index.php/Dashboard');
-
             }
-
         } else {
 
             $this->session->set_flashdata('msg', 'Username Or Password is Invalid');
@@ -116,7 +110,6 @@ class Users extends MY_Controller
         $this->header($title = 'Add User');
         $this->load->view('users/add_user', $data);
         $this->footer();
-
     }
 
     //Get values and Create User................
@@ -148,7 +141,6 @@ class Users extends MY_Controller
         $this->db->insert('usr_user', $data_user);
         $this->session->set_flashdata('msg', 'Add Successfully');
         redirect(base_url() . "index.php/Users/add_user");
-
     }
 
     // List all users
@@ -157,7 +149,6 @@ class Users extends MY_Controller
         $this->header($title = 'Users List');
         $this->load->view();
         $this->footer();
-
     }
 
     // Delete specific user
@@ -168,7 +159,6 @@ class Users extends MY_Controller
 
         $this->session->set_userdata('msg', 'User has been deleted successfully');
         redirect(base_url() . 'index.php/Users/add_user');
-
     }
 
     //status of user (Active)
@@ -208,7 +198,6 @@ class Users extends MY_Controller
     public function register()
     {
         $this->load->view('users/register');
-
     }
 
     // Registering User Insert

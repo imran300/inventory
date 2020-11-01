@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
  *	Kandi Inventory Management System
- * website: kelextech.com
+ * website: phptiger.com
  *  version: 1.0
  */
 class Stock extends MY_Controller
@@ -21,9 +21,7 @@ class Stock extends MY_Controller
 
 
             redirect(base_url() . 'index.php/Users/login');
-
         }
-
     }
 
 
@@ -37,7 +35,6 @@ class Stock extends MY_Controller
         $this->header();
         $this->load->view('stock/list_stock', $data);
         $this->footer();
-
     }
 
 
@@ -62,10 +59,7 @@ class Stock extends MY_Controller
    </button>
    <span>Record Updated Successfully..!</span>
 </div>');
-
         }
         redirect(base_url() . 'index.php/Stock/list_stock');
     }
-
-
 }

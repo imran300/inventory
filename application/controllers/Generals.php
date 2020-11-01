@@ -8,7 +8,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
  *	Kandi Inventory Management System
- * website: kelextech.com
+ * website: phptiger.com
  *  version: 1.0
  */
 
@@ -33,7 +33,6 @@ class generals extends MY_Controller
 
 
             redirect(base_url() . 'index.php/Users/login');
-
         }
     }
 
@@ -51,8 +50,7 @@ class generals extends MY_Controller
             //SET SESSION FOR PAGE ID................................................
             $this->session->set_userdata("menu_id", $pagerow->MENU_ID);
         }
-        redirect(base_url() . 'index.php/'.$getPage);
-
+        redirect(base_url() . 'index.php/' . $getPage);
     }
 
     // Creating breadcrumbs
@@ -74,13 +72,10 @@ class generals extends MY_Controller
 
                     $this->session->set_userdata("parent_name", $row_r2->MENU_TEXT);
                 }
-
             } else {
                 $this->session->set_userdata("parent_name", $row_r->MENU_TEXT);
             }
-
         }
-
     }
 
     //Add Group....
@@ -117,7 +112,7 @@ class generals extends MY_Controller
         $this->session->set_flashdata('msg', 'Add Successfully');
         redirect(base_url() . 'Generals/add_group');
     }
-    
+
     //Edit Group....
     public function edit_group($id)
     {
@@ -164,7 +159,6 @@ class generals extends MY_Controller
             } else {
                 @$u .= $value . "/";
             }
-
         }
         $config['base_url'] = base_url() . $u . "/page/";
 
@@ -177,7 +171,6 @@ class generals extends MY_Controller
         $data['menus'] = $this->General->fetch_bysinglecol($col, $tbl, $id);
         $this->load->view('generals/add_menu', $data);
         $this->footer();
-
     }
 
     //Create menu....
@@ -232,7 +225,6 @@ class generals extends MY_Controller
         $this->header();
         $this->load->view('general/edit_menu', $menu);
         $this->footer();
-
     }
 
     //Update Menu....
@@ -281,7 +273,6 @@ class generals extends MY_Controller
             if (isset($permission['view'][$menuid])) {
 
                 $view = 1;
-
             }
             if (!isset($permission['view'][$menuid])) {
 
@@ -378,7 +369,6 @@ class generals extends MY_Controller
         $this->db->from('usr_permission');
 
         return $this->db->count_all_results();
-
     }
     // Fetch Permissions for records
     public function fetchRecordpermission($id, $group_id)
@@ -389,7 +379,6 @@ class generals extends MY_Controller
         $r_sql = $sql->result();
 
         return $r_sql;
-
     }
     // Fetch child against parent 
     public function fetch_child($parentid)
@@ -398,7 +387,6 @@ class generals extends MY_Controller
         $sql = $this->db->query("SELECT * FROM usr_menu WHERE MENU_ID='$parentid' ORDER BY ASC");
 
         return $sql;
-
     }
 
     // Check child menus count
@@ -416,67 +404,64 @@ class generals extends MY_Controller
         $this->db->from('usr_menu');
 
         return $this->db->count_all_results();
-
-
     }
 
     //Fetch child menu
     public function fetchchildMenu($pmenuid)
     {
         return $this->General->fetch_bysinglecol("PARENT_ID", "usr_menu", $pmenuid);
-
     }
 
     /*===== EDIT COMPANY INFO LOAD FORM ======*/
     public function edit_company_info()
     {
-            $id = $this->uri->segment(3);
-            $data['company_info'] = $this->General->get_company_info();
-            $this->header();
-            $this->load->view('company/company_information',$data);
-            $this->footer();
+        $id = $this->uri->segment(3);
+        $data['company_info'] = $this->General->get_company_info();
+        $this->header();
+        $this->load->view('company/company_information', $data);
+        $this->footer();
     }
 
     /*===== SAVE EDIT COMPANY INFORMATION =====*/
     public function save_edit_info()
     {
-            if ($_POST) {
-                $config = array(
-                    array(
-                        'field' => 'name',
-                        'label' => 'Name',
-                        'rules' => 'trim|required'
-                    ),
-                    array(
-                        'field' => 'email',
-                        'label' => 'Email',
-                        'rules' => 'trim|required'
-                    ),
-                    array(
-                        'field' => 'contact',
-                        'label' => 'Contact No.',
-                        'rules' => 'trim|required'
-                    ),
-                    array(
-                        'field' => 'address',
-                        'label' => 'Address',
-                        'rules' => 'trim|required'
-                    ),
-                    array(
-                        'field' => 'website',
-                        'label' => 'Website url',
-                        'rules' => 'trim|required'
-                    )
-                );
-                $this->form_validation->set_rules($config);
-                if ($this->form_validation->run() == false) {
-                    echo json_encode((["msg_type" => "error", "message" => validation_errors()]));
-                } else {
-                    $id = $this->input->post('id2');
-                    $this->General->update_company($_POST, $id);
-                    echo json_encode((["msg_type" => "success", "message" => "Info Updated Successfully"]));
-                }
+        if ($_POST) {
+            $config = array(
+                array(
+                    'field' => 'name',
+                    'label' => 'Name',
+                    'rules' => 'trim|required'
+                ),
+                array(
+                    'field' => 'email',
+                    'label' => 'Email',
+                    'rules' => 'trim|required'
+                ),
+                array(
+                    'field' => 'contact',
+                    'label' => 'Contact No.',
+                    'rules' => 'trim|required'
+                ),
+                array(
+                    'field' => 'address',
+                    'label' => 'Address',
+                    'rules' => 'trim|required'
+                ),
+                array(
+                    'field' => 'website',
+                    'label' => 'Website url',
+                    'rules' => 'trim|required'
+                )
+            );
+            $this->form_validation->set_rules($config);
+            if ($this->form_validation->run() == false) {
+                echo json_encode((["msg_type" => "error", "message" => validation_errors()]));
+            } else {
+                $id = $this->input->post('id2');
+                $this->General->update_company($_POST, $id);
+                echo json_encode((["msg_type" => "success", "message" => "Info Updated Successfully"]));
             }
+        }
     }
 
     /*====== CURRENCY SECTION START ======*/
@@ -486,9 +471,8 @@ class generals extends MY_Controller
         $data['currencies'] = $this->General->fetch_records('currency_settings');
         $data['get_current_currency'] = $this->General->get_current_currency_name();
         $this->header();
-        $this->load->view('generals/change_currency',$data);
+        $this->load->view('generals/change_currency', $data);
         $this->footer();
-
     }
 
     /*====== SAVE CURRENCY ======*/
@@ -511,74 +495,74 @@ class generals extends MY_Controller
             }
         }
     }
-    
-	/*===== DEFAULT BACKUP VIEW ======*/
-	public function backup()
-	{
-		$data['bkups'] = directory_map('./backups/', 1);
-		$data['pageTitle'] = 'Backup Database';
-		$this->header('Backups');
-		$this->load->view("generals/backups", $data);
-		$this->footer();
-	}//--End of Function backup()
 
-	/*===== CREATE BACKUP =====*/
-	public function create_backup()
-	{
-		$result = $this->db->query("SHOW TABLE STATUS")->result();
-		$tableinfo = array();
-		$totalsize = 0;
-		$totalrows = 0;
-		foreach ($result as $res) {
-			$size = round($res->Data_length / 1000, 2);
-			$totalsize += $size;
-			$totalrows += $res->Rows;
-			$tableinfo['all'][] = (object)array("name" => $res->Name, "size" => $size . " KB", "rows" => $res->Rows);
-		}
-		$tableinfo['totalSize'] = round(($totalsize / 1000), 2) . " MB";
-		$tableinfo['totalRows'] = $totalrows;
-		$data['dbtables'] = $tableinfo;
-		$this->header('Database Backup');
-		$this->load->view("generals/create_backup", $data);
-		$this->footer();
-	}//--End of Function create_backup()
-	/*===== CREATE BACKUP BUTTON ACTION =====*/
-	public function create_backup_action()
-	{
-		$getbackup = $this->input->post('getbackup');
-		if (!empty($getbackup)) {
-			$tables = $this->input->post('dbtables');
-			if (empty($tables)) {
-				echo json_encode(array("msg_type" => "error", "message" => "Please Select Table for Backup"));
-			} else {
-				$this->getBackup($tables);
-			}
-		}
-	}//-- End of Function create_backup_action()
+    /*===== DEFAULT BACKUP VIEW ======*/
+    public function backup()
+    {
+        $data['bkups'] = directory_map('./backups/', 1);
+        $data['pageTitle'] = 'Backup Database';
+        $this->header('Backups');
+        $this->load->view("generals/backups", $data);
+        $this->footer();
+    } //--End of Function backup()
 
-	/*===== GET BACKUP FILE AND SEND SUCCESS MESSAGE ======*/
-	public function getBackup($tables)
-	{
-		$this->load->dbutil();
-		$prefs = array(
-			'tables' => $tables,
-			'format' => 'txt',
-			'filename' => 'my_db_backup.sql'
-		);
-		$backup = $this->dbutil->backup($prefs);
-		$db_name = 'backup-on-' . date("Y-m-d-H-i-s") . '.sql';
-		$save = 'backups/' . $db_name;
-		$this->load->helper('file');
-		write_file($save, $backup);
-		$redirect_link = base_url('Generals/backup');
-		echo json_encode(array("msg_type" => "success", "message" => "Backup Created Successfully", 'redirect_link' => $redirect_link));
-	}//-- End of Function getBackup()
-	/*===== DOWNLOAD BACKUP FILE OF YOUR DATABASE ======*/
-	function download()
-	{
-		$file = $this->input->get('backup');
-		$sql = file_get_contents('backups/' . $file);
-		$this->load->helper('download');
-		force_download($file, $sql);
-	}//-- End of Function download()
+    /*===== CREATE BACKUP =====*/
+    public function create_backup()
+    {
+        $result = $this->db->query("SHOW TABLE STATUS")->result();
+        $tableinfo = array();
+        $totalsize = 0;
+        $totalrows = 0;
+        foreach ($result as $res) {
+            $size = round($res->Data_length / 1000, 2);
+            $totalsize += $size;
+            $totalrows += $res->Rows;
+            $tableinfo['all'][] = (object)array("name" => $res->Name, "size" => $size . " KB", "rows" => $res->Rows);
+        }
+        $tableinfo['totalSize'] = round(($totalsize / 1000), 2) . " MB";
+        $tableinfo['totalRows'] = $totalrows;
+        $data['dbtables'] = $tableinfo;
+        $this->header('Database Backup');
+        $this->load->view("generals/create_backup", $data);
+        $this->footer();
+    } //--End of Function create_backup()
+    /*===== CREATE BACKUP BUTTON ACTION =====*/
+    public function create_backup_action()
+    {
+        $getbackup = $this->input->post('getbackup');
+        if (!empty($getbackup)) {
+            $tables = $this->input->post('dbtables');
+            if (empty($tables)) {
+                echo json_encode(array("msg_type" => "error", "message" => "Please Select Table for Backup"));
+            } else {
+                $this->getBackup($tables);
+            }
+        }
+    } //-- End of Function create_backup_action()
+
+    /*===== GET BACKUP FILE AND SEND SUCCESS MESSAGE ======*/
+    public function getBackup($tables)
+    {
+        $this->load->dbutil();
+        $prefs = array(
+            'tables' => $tables,
+            'format' => 'txt',
+            'filename' => 'my_db_backup.sql'
+        );
+        $backup = $this->dbutil->backup($prefs);
+        $db_name = 'backup-on-' . date("Y-m-d-H-i-s") . '.sql';
+        $save = 'backups/' . $db_name;
+        $this->load->helper('file');
+        write_file($save, $backup);
+        $redirect_link = base_url('Generals/backup');
+        echo json_encode(array("msg_type" => "success", "message" => "Backup Created Successfully", 'redirect_link' => $redirect_link));
+    } //-- End of Function getBackup()
+    /*===== DOWNLOAD BACKUP FILE OF YOUR DATABASE ======*/
+    function download()
+    {
+        $file = $this->input->get('backup');
+        $sql = file_get_contents('backups/' . $file);
+        $this->load->helper('download');
+        force_download($file, $sql);
+    } //-- End of Function download()
 }

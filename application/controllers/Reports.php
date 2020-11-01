@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
  *	Kandi Inventory Management System
- * website: kelextech.com
+ * website: phptiger.com
  *  version: 1.0
  */
 class Reports extends MY_Controller
@@ -18,48 +18,46 @@ class Reports extends MY_Controller
         parent::__construct();
 
         if ($this->session->userdata('user_id')) {
-            
         } else {
 
 
             redirect(base_url() . 'index.php/Users/login');
-
         }
     }
 
     //Purchase Report  Form
     public function purchase()
     {
-        $data['items'] = $this->Main_model->select('item');        
+        $data['items'] = $this->Main_model->select('item');
         $this->header($title = 'Purchase Report');
-        $this->load->view('reports/purchase',$data);
+        $this->load->view('reports/purchase', $data);
         $this->footer();
-
     }
-     // Purchase Report Details
+    // Purchase Report Details
     public function purchaseReportOld()
     {
         $start_date = $this->input->post('start_date');
         $end_date = $this->input->post('end_date');
         $start_date1 = date('Y-m-d', strtotime($start_date));
         $end_date1 = date('Y-m-d', strtotime($end_date));
-        $data['purchases'] = $this->Main_model->purchases($start_date1,$end_date1);
-//echo "<pre>";print_r($data['purchases']);exit;       
-	   $data['start'] = $start_date;
+        $data['purchases'] = $this->Main_model->purchases($start_date1, $end_date1);
+        //echo "<pre>";print_r($data['purchases']);exit;       
+        $data['start'] = $start_date;
         $data['end'] = $end_date;
         $data['items'] = $this->Main_model->select('item');
         $this->header();
-        $this->load->view('reports/purchase',$data);
+        $this->load->view('reports/purchase', $data);
         $this->footer();
     }
-	function purchaseReport(){
-		$start_date = $this->input->post('start_date');
+    function purchaseReport()
+    {
+        $start_date = $this->input->post('start_date');
         $end_date = $this->input->post('end_date');
         $start_date1 = date('Y-m-d', strtotime($start_date));
         $end_date1 = date('Y-m-d', strtotime($end_date));
 
         $invoice = $this->Main_model->get_invoice_by_date1($start_date1, $end_date1);
-               //echo "<pre>";print_r($invoice);exit;
+        //echo "<pre>";print_r($invoice);exit;
         if (!empty($invoice)) {
             $this->bps_table();
             foreach ($invoice as $v_invoice) {
@@ -68,30 +66,29 @@ class Reports extends MY_Controller
             }
         }
 
-       // echo "<pre>";print_r($data);exit;
+        // echo "<pre>";print_r($data);exit;
         //$data['purchases'] = $this->Main_model->getSales($start_date1,$end_date1);
         $data['start'] = $start_date;
         $data['end'] = $end_date;
         $data['items'] = $this->Main_model->select('item');
         $this->header();
         //print_r($data);
-        $this->load->view('reports/p_report',$data);
+        $this->load->view('reports/p_report', $data);
         $this->footer();
-	}
+    }
 
     // Sales Report Form
     public function sales_report()
     {
         $data['items'] = $this->Main_model->select('item');
         $this->header($title = 'Sales Report');
-        $this->load->view('reports/sales_report',$data);
+        $this->load->view('reports/sales_report', $data);
         $this->footer();
-
     }
 
     public function bps_table()
     {
-       $this->Main_model->bps_table('sales_detail','sales_id');
+        $this->Main_model->bps_table('sales_detail', 'sales_id');
     }
     // Get Sales Report Details
     public function salesReport()
@@ -102,7 +99,7 @@ class Reports extends MY_Controller
         $end_date1 = date('Y-m-d', strtotime($end_date));
 
         $invoice = $this->Main_model->get_invoice_by_date($start_date1, $end_date1);
-               //echo "<pre>";print_r($invoice);exit;
+        //echo "<pre>";print_r($invoice);exit;
         if (!empty($invoice)) {
             $this->bps_table();
             foreach ($invoice as $v_invoice) {
@@ -111,15 +108,14 @@ class Reports extends MY_Controller
             }
         }
 
-       // echo "<pre>";print_r($data);exit;
+        // echo "<pre>";print_r($data);exit;
         //$data['purchases'] = $this->Main_model->getSales($start_date1,$end_date1);
         $data['start'] = $start_date;
         $data['end'] = $end_date;
         $data['items'] = $this->Main_model->select('item');
         $this->header();
         //print_r($data);
-        $this->load->view('reports/sales_report',$data);
+        $this->load->view('reports/sales_report', $data);
         $this->footer();
     }
-
 }

@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
  *	Kandi Inventory Management System
- * website: kelextech.com
+ * website: phptiger.com
  *  version: 1.0
  */
 class Sales extends MY_Controller
@@ -23,9 +23,7 @@ class Sales extends MY_Controller
 
 
             redirect(base_url() . 'index.php/Users/login');
-
         }
-
     }
 
     // creating New Sale Form
@@ -43,8 +41,6 @@ class Sales extends MY_Controller
         $this->header($title = 'New Sales');
         $this->load->view('sales/new_sale', $data);
         $this->footer();
-
-
     }
 
     // get product list of sales
@@ -142,7 +138,6 @@ class Sales extends MY_Controller
                     );
                     $where = array('item_id' => $id, 'category_id' => $category_id[$key]);
                     $this->Main_model->update_record('stock', $data, $where);
-
                 } else {
                     $data = array(
                         "item_id" => $id,
@@ -162,19 +157,15 @@ class Sales extends MY_Controller
             $row['sales_amount'] = $totals[$key];
             $data = $row;
             $res = $this->db->insert("sales_detail", $data);
-
         }
         $this->session->set_flashdata("message", "Invoice #($invoice_id) Added Successfully!");
         redirect(base_url() . "index.php/Sales/sales_history");
-
-
     }
 
     // Sales Table
     public function sale_index()
     {
         $this->Main_model->bps_table('sales', 'sales_no');
-
     }
 
     // Sales History or Sales List
@@ -197,7 +188,6 @@ class Sales extends MY_Controller
     public function salesItems()
     {
         $this->Main_model->bps_table('sales', 'sales_no');
-
     }
 
     // Show single sales history in invoice

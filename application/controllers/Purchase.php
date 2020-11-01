@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
  *	Kandi Inventory Management System
- * website: kelextech.com
+ * website: phptiger.com
  *  version: 1.0
  */
 class Purchase extends MY_Controller
@@ -18,12 +18,9 @@ class Purchase extends MY_Controller
         parent::__construct();
         $this->load->model('Main_model');
         if ($this->session->userdata("user_id")) {
-
         } else {
             redirect(base_url() . 'users/login');
         }
-
-
     }
 
     // Get item by search
@@ -31,11 +28,9 @@ class Purchase extends MY_Controller
     {
         if (isset($_GET['term'])) {
             $q = strtolower($_GET['term']);
-
         }
         $results = $this->Main_model->get_search_results();
         echo $results;
-
     }
 
     // Loading New Purchase form
@@ -52,8 +47,6 @@ class Purchase extends MY_Controller
         $this->header($title = 'New Purchase');
         $this->load->view('purchase/list_purchases', $data);
         $this->footer();
-
-
     }
 
     // Daily Purchase Report
@@ -129,7 +122,6 @@ class Purchase extends MY_Controller
         } else {
             echo $output = 0;
         }
-
     }
 
     // Insert new Purchase to Database
@@ -167,7 +159,6 @@ class Purchase extends MY_Controller
                     );
                     $where = array('item_id' => $item_id[$i], 'category_id' => $category_id[$i]);
                     $this->Main_model->update_record('stock', $data, $where);
-
                 } else {
                     $data = array(
                         "item_id" => $item_id[$i],
@@ -195,8 +186,7 @@ class Purchase extends MY_Controller
 
 
             $data_entry = $this->Main_model->add_record('purchase', $purchase_data);
-
-        }//for loop
+        } //for loop
         $vendor_id = $this->input->post('vendor_id');
         $company_id = $this->input->post('company_id');
         $paymentTotal = $this->input->post('paymentTotal');
@@ -223,7 +213,6 @@ class Purchase extends MY_Controller
             $this->session->set_flashdata('success', 'Record added Successfully..!');
             redirect(Base_url() . 'index.php/Purchase/show_purchase_history/' . $purchase_code . '');
         }
-
     }
 
     // Purchase History
@@ -265,8 +254,5 @@ class Purchase extends MY_Controller
             echo json_encode($data);
             exit;
         }
-
-
     }
-
 }

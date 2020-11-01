@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
  *	Kandi Inventory Management System
- * website: kelextech.com
+ * website: phptiger.com
  *  version: 1.0
  */
 class Item extends MY_Controller
@@ -21,9 +21,7 @@ class Item extends MY_Controller
 
 
             redirect(base_url() . 'index.php/Users/login');
-
         }
-
     }
 
     // Create Barcodes Form
@@ -39,7 +37,6 @@ class Item extends MY_Controller
         $item_id = $this->input->post('id');
         $data['items'] = $this->Main_model->items($item_id);
         $this->load->view('item/pop_item', $data);
-
     }
 
     // Getting data for barcodes
@@ -89,7 +86,6 @@ class Item extends MY_Controller
         $data['products'] = $this->db->query("SELECT * FROM stock AS s, item AS i WHERE  s.stock_qty > 0 AND i.`item_id` = s.`item_id`")->result();
         $data['items'] = $this->Main_model->item_cat();
         $this->load->view('item/print_barcodesItems', $data);
-
     }
 
     // Generate Barcodes
@@ -106,7 +102,6 @@ class Item extends MY_Controller
         $cat = $this->input->post('category');
         $data['items'] = $this->Main_model->item_cat1($cat);
         $this->load->view('item/print_barcodes', $data);
-
     }
 
     // List Items
@@ -118,8 +113,6 @@ class Item extends MY_Controller
         $this->header();
         $this->load->view('item/list_items', $data);
         $this->footer();
-
-
     }
 
     // Inserting new Item to Database
@@ -176,7 +169,6 @@ class Item extends MY_Controller
 
                 $this->session->set_flashdata('success', 'Product added Successfully');
                 redirect(base_url() . 'index.php/Item/list_items');
-
             }
         }
     }
@@ -202,6 +194,4 @@ class Item extends MY_Controller
 
         redirect(base_url() . 'index.php/Item/list_items');
     }
-
-
 }

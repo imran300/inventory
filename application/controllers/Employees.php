@@ -9,7 +9,7 @@ if (!defined('BASEPATH'))
 *  @support: shahmian@gmail.com
 *	date	: 18 April, 2018
 *	Kandi Inventory Management System
- * website: kelextech.com
+ * website: phptiger.com
 *  version: 1.0
 */
 /**
@@ -26,12 +26,9 @@ class Employees extends MY_Controller
     {
         parent::__construct();
         if ($this->session->userdata('user_id')) {
-
         } else {
             redirect(base_url() . 'index.php/Users/login');
-
         }
-
     }
 
     // A view function for add new employee
@@ -42,7 +39,6 @@ class Employees extends MY_Controller
         $this->load->view('employee/add_employee');
 
         $this->footer();
-
     }
 
     // Adding new employees
@@ -52,10 +48,12 @@ class Employees extends MY_Controller
         if ($_FILES['file_picture']['name'] != '') {
 
             $data_upload = $uploaddir . basename($_FILES['file_picture']['name']);
-            $imageFileType = strtolower(pathinfo($data_upload,PATHINFO_EXTENSION));
+            $imageFileType = strtolower(pathinfo($data_upload, PATHINFO_EXTENSION));
             // Allow certain file formats
-            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                && $imageFileType != "gif" ) {
+            if (
+                $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif"
+            ) {
                 $this->session->set_flashdata('msg', '<div class="alert alert-warning alert-dismissable">
    <button type="button" class="close" data-dismiss="alert"
       aria-hidden="true">
@@ -65,8 +63,7 @@ class Employees extends MY_Controller
 </div>');
                 //echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                 $uploadOk = 0;
-                redirect(base_url().'index.php/employees/add_employee');
-
+                redirect(base_url() . 'index.php/employees/add_employee');
             }
 
             if (move_uploaded_file($_FILES['file_picture']['tmp_name'], $data_upload)) {
@@ -74,8 +71,6 @@ class Employees extends MY_Controller
                 $picture = $data_upload;
             } else {
                 $picture = '';
-
-
             }
         } else {
 
@@ -120,8 +115,6 @@ class Employees extends MY_Controller
    <span>Record added Successfully..!</span>
 </div>');
         redirect(base_url() . 'index.php/employees/employee_list');
-
-
     }
 
 
@@ -174,8 +167,6 @@ class Employees extends MY_Controller
 </div>');
 
         redirect(base_url() . 'index.php/employees/employee_list');
-
-
     }
 
     // List of all employees
@@ -185,7 +176,6 @@ class Employees extends MY_Controller
         $this->header($title = 'Employees List');
         $this->load->view('employee/employee_list', $data);
         $this->footer();
-
     }
     // Employee details
     public function employee_detail()
@@ -200,11 +190,9 @@ class Employees extends MY_Controller
     // Edit employee form
     public function edit_employee($id)
     {
-       $data['record'] = $this->General->select_where('employee_profile',array('EMP_ID'=>$id));
+        $data['record'] = $this->General->select_where('employee_profile', array('EMP_ID' => $id));
         $this->header();
-        $this->load->view('employee/edit_employee',$data);
+        $this->load->view('employee/edit_employee', $data);
         $this->footer();
-
     }
-
 }

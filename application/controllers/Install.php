@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
  *	Kandi Inventory Management System
- * website: kelextech.com
+ * website: phptiger.com
  *  version: 1.0
  */
 
@@ -61,7 +61,7 @@ class Install extends CI_Controller
             // Connect to the database
             $mysqli = new mysqli($this->input->post('db_hname'), $this->input->post('db_uname'), $this->input->post('db_password'), $this->input->post('db_name'));
             //Create Database
-           // $mysqli->query('CREATE DATABASE IF NOT EXISTS ' . $this->input->post('db_name'));
+            // $mysqli->query('CREATE DATABASE IF NOT EXISTS ' . $this->input->post('db_name'));
             // Read the file
             $schema = file_get_contents(APPPATH . 'kandi_inventory.sql');
             //Run multi Query
@@ -84,10 +84,9 @@ class Install extends CI_Controller
                 echo 'db_failed';
             }
         }
-
     }
 
-// Proceed the installation
+    // Proceed the installation
     function proceed_installation()
     {
         $connector = $this->input->post('connector');
@@ -106,17 +105,17 @@ class Install extends CI_Controller
         if (!$link) {
             @mysqli_close($link);
             return false;
-        }else{
+        } else {
             return true;
         }
         // Create database
-//        $sql = "CREATE DATABASE ".$this->input->post('db_name');
-//        if ($link->query($sql) === TRUE) {
-//            echo "Database created successfully";
-//        } else {
-//            echo "Error creating database: " . $link->error;
-//        }
-        $db_selected = mysqli_select_db($link,$this->input->post('db_name'));
+        //        $sql = "CREATE DATABASE ".$this->input->post('db_name');
+        //        if ($link->query($sql) === TRUE) {
+        //            echo "Database created successfully";
+        //        } else {
+        //            echo "Error creating database: " . $link->error;
+        //        }
+        $db_selected = mysqli_select_db($link, $this->input->post('db_name'));
         if (!$db_selected) {
             @mysqli_close($link);
             return false;
@@ -145,8 +144,6 @@ class Install extends CI_Controller
             echo 'not';
         }
     }
-
-
 }
 
 /* End of file install.php */

@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
  *	Kandi Inventory Management System
- *  website: kelextech.com
+ *  website: phptiger.com
  *  version: 1.0
  */
 class Vendor extends MY_Controller
@@ -19,9 +19,8 @@ class Vendor extends MY_Controller
 
         if ($this->session->userdata('user_id')) {
         } else {
-            
-            redirect(base_url() . 'index.php/Users/login');
 
+            redirect(base_url() . 'index.php/Users/login');
         }
     }
 
@@ -33,14 +32,12 @@ class Vendor extends MY_Controller
         $this->load->view('vendor/add_vendor');
 
         $this->footer();
-
     }
 
     // Get Vendor Table
     public function vend_index()
     {
         $this->Main_model->bps_table('vendor', 'vendor_id');
-
     }
 
     // List of Vendors
@@ -53,8 +50,6 @@ class Vendor extends MY_Controller
         $this->header($title = 'Vendors List');
         $this->load->view('vendor/list_vendor', $data);
         $this->footer();
-
-
     }
 
     // Insert new Vendor to Database
@@ -97,6 +92,4 @@ class Vendor extends MY_Controller
             redirect(base_url() . 'index.php/Vendor/list_vendors');
         }
     }
-
-
 }

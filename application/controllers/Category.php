@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
  *	@author : Imran Shah
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
- * website: kelextech.com
+ * website: phptiger.com
  *	Kandi Inventory Management System
  *  version: 1.0
  */
@@ -18,11 +18,9 @@ class Category extends MY_Controller
         parent::__construct();
         //Check if user is logged in or id exists in session
         if ($this->session->userdata('user_id')) {
-
         } else {
 
             redirect(base_url() . 'index.php/Users/login');
-
         }
     }
 
@@ -30,7 +28,7 @@ class Category extends MY_Controller
     public function list_category()
     {
         $group_id = $this->session->userdata("group_id");
-        if($group_id !=1){
+        if ($group_id != 1) {
             $Page = $this->General->check_url_permission_single();
         }
         $data['category'] = $this->General->fetch_records("category");
@@ -39,7 +37,6 @@ class Category extends MY_Controller
         $this->load->view('category/list_category', $data);
 
         $this->footer();
-
     }
 
     // Add new category to Databse
@@ -72,6 +69,4 @@ class Category extends MY_Controller
             redirect(base_url() . 'index.php/category/list_category');
         }
     }
-
-
 }

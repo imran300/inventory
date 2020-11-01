@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
  *	Kandi Inventory Management System
- * website: kelextech.com
+ * website: phptiger.com
  *  version: 1.0
  */
 class Company extends MY_Controller
@@ -21,9 +21,7 @@ class Company extends MY_Controller
 
 
             redirect(base_url() . 'index.php/Users/login');
-
         }
-
     }
 
 
@@ -39,24 +37,20 @@ class Company extends MY_Controller
         $this->load->view('company/add_company');
 
         $this->footer();
-
     }
 
     // List companies
     public function list_company()
     {
         $group_id = $this->session->userdata("group_id");
-        if($group_id !=1){
+        if ($group_id != 1) {
             $Page = $this->General->check_url_permission_single();
-
         }
 
         $data['company'] = $this->General->fetch_records("company");
         $this->header();
         $this->load->view('company/list_company', $data);
         $this->footer();
-
-
     }
 
     // Add company to database

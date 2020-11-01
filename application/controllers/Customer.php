@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 April, 2018
  *	Kandi Inventory Management System
- * website: kelextech.com
+ * website: phptiger.com
  *  version: 1.0
  */
 class Customer extends MY_Controller
@@ -21,9 +21,7 @@ class Customer extends MY_Controller
 
 
             redirect(base_url() . 'index.php/Users/login');
-
         }
-
     }
 
 
@@ -36,21 +34,18 @@ class Customer extends MY_Controller
         $this->load->view('customer/add_customer');
 
         $this->footer();
-
     }
     // List Customers
     public function list_customers()
     {
         $group_id = $this->session->userdata("group_id");
-        if($group_id !=1){
+        if ($group_id != 1) {
             $Page = $this->General->check_url_permission_single();
         }
         $data['customers'] = $this->General->fetch_records("customer");
         $this->header($title = 'Customers List');
         $this->load->view('customer/list_customers', $data);
         $this->footer();
-
-
     }
     // Customer Details
     public function customer_detail()
@@ -74,7 +69,7 @@ class Customer extends MY_Controller
             'address' => $this->input->post("address"),
             'trn' => $this->input->post("trn"),
         );
-        
+
         $response = $this->Main_model->add_record('customer', $data);
         if ($response) {
             $this->session->set_flashdata('msg', 'Customer added Successfully..!');
@@ -103,10 +98,6 @@ class Customer extends MY_Controller
         } else {
             $this->session->set_flashdata('warning', 'Customer didnt updated..!');
             redirect(base_url() . 'index.php/customer/list_customers');
-
-
         }
     }
-
-
 }
