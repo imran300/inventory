@@ -1,11 +1,10 @@
-
 </div>
 <!-- /.content-wrapper -->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
         <b>Version</b> 1.4.0
     </div>
-    <strong>Copyright &copy; 2019 <a href="https://beb300.com">BEB300 Technologies</a>.</strong> All rights
+    <strong>Copyright &copy; 2019 <a href="https://phptiger.com">PHP Tiger Technologies</a>.</strong> All rights
     reserved.
 </footer>
 </div>
@@ -38,8 +37,7 @@
 <script src="<?= base_url() ?>assets/bower_components/moment/min/moment.min.js"></script>
 <script src="<?= base_url() ?>assets/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
-<script
-    src="<?= base_url() ?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="<?= base_url() ?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?= base_url() ?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll
@@ -53,9 +51,9 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?= base_url() ?>assets/dist/js/demo.js"></script>
 <!-- CK Editor -->
-<script src="<?=base_url()?>assets/bower_components/ckeditor/ckeditor.js"></script>
+<script src="<?= base_url() ?>assets/bower_components/ckeditor/ckeditor.js"></script>
 <script>
-    $(function () {
+    $(function() {
         $('#example1').DataTable()
         $('#example2').DataTable({
             'paging': true,
@@ -69,19 +67,21 @@
 </script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('.datepicker').datepicker({
             autoclose: true
         })
-        $.ajaxSetup({cache: false});
-        $('#search').keyup(function () {
+        $.ajaxSetup({
+            cache: false
+        });
+        $('#search').keyup(function() {
             $('#result').html('');
             $('#state').val('');
-            var img = "<?=base_url()?>";
+            var img = "<?= base_url() ?>";
             var searchField = $('#search').val();
             var expression = new RegExp(searchField, "i");
-            $.getJSON('<?=base_url()?>dashboard/getSearchData', function (data) {
-                $.each(data, function (key, value) {
+            $.getJSON('<?= base_url() ?>dashboard/getSearchData', function(data) {
+                $.each(data, function(key, value) {
                     if (value.EMP_NAME.search(expression) != -1) {
                         $('#result').append('<li class="list-group-item link-class">' +
                             '<img src="' + img + '' + value.EMP_PIC + '" height="40" width="40" class="img-thumbnail" /><a href="' + img + 'employees/employee_detail/' + value.EMP_ID + '">' + value.EMP_NAME + '</a> | <span class="text-muted">' + value.EMP_CELL + '</span></li>');
@@ -90,30 +90,30 @@
             });
         });
 
-        $('#result').on('click', 'li', function () {
+        $('#result').on('click', 'li', function() {
             var click_text = $(this).text().split('|');
             $('#search').val($.trim(click_text[0]));
             $("#result").html('');
         });
-        
-        
-        
-        
+
+
+
+
     });
 
-    $(function(){
-        <?php if($this->session->flashdata("success")): ?>
-        toastr.success("<?= $this->session->flashdata("success") ?>");
-        <?php elseif($this->session->flashdata("error")): ?>
-        toastr.error("<?= $this->session->flashdata("error") ?>");
-        <?php elseif($this->session->flashdata("info")): ?>
-        toastr.info("<?= $this->session->flashdata("info") ?>");
-        <?php elseif($this->session->flashdata("warning")): ?>
-        toastr.warning("<?= $this->session->flashdata("warning") ?>");
-        <?php endif;?>
+    $(function() {
+        <?php if ($this->session->flashdata("success")) : ?>
+            toastr.success("<?= $this->session->flashdata("success") ?>");
+        <?php elseif ($this->session->flashdata("error")) : ?>
+            toastr.error("<?= $this->session->flashdata("error") ?>");
+        <?php elseif ($this->session->flashdata("info")) : ?>
+            toastr.info("<?= $this->session->flashdata("info") ?>");
+        <?php elseif ($this->session->flashdata("warning")) : ?>
+            toastr.warning("<?= $this->session->flashdata("warning") ?>");
+        <?php endif; ?>
     });
-
 </script>
 
 </body>
+
 </html>
