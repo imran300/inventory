@@ -6,7 +6,7 @@
  *  @support: shahmian@gmail.com
  *	date	: 18 October, 2017
  *	Kandi Inventory Management System
- *	http://kelextech.com
+ *	https://phptiger.com
  *  version: 1.0
  */
 class Main_model extends MY_Model
@@ -16,7 +16,7 @@ class Main_model extends MY_Model
     public function __construct()
     {
         parent::__construct();
-       // $this->cms_db = $this->load->database('forum', TRUE);
+        // $this->cms_db = $this->load->database('forum', TRUE);
     }
 
     public function test()
@@ -31,7 +31,6 @@ class Main_model extends MY_Model
 
         $this->_table_name = $table;
         $this->_primary_key = $pr_key;
-
     }
 
     //fetch max id
@@ -51,7 +50,6 @@ class Main_model extends MY_Model
         $this->db->from($table);
         $query = $this->db->get();
         return $query->result();
-
     }
 
     // add record
@@ -111,7 +109,6 @@ class Main_model extends MY_Model
 
 
         return $q->row_array();
-
     }
 
     //get user details
@@ -273,19 +270,18 @@ WHERE item.item_id=$item_id
         return $query->num_rows();
     }
 
-   // get stock quantity
-	public function get_stock_qty($item, $category = '')
-	{
-		$this->db->select('*');
-		$this->db->from('stock');
-		$this->db->where('item_id', $item);
-		if ($category != ''):
-			$this->db->where('category_id', $category);
-		endif;
-		$query = $this->db->get();
-		return $query->row();
-
-	}
+    // get stock quantity
+    public function get_stock_qty($item, $category = '')
+    {
+        $this->db->select('*');
+        $this->db->from('stock');
+        $this->db->where('item_id', $item);
+        if ($category != '') :
+            $this->db->where('category_id', $category);
+        endif;
+        $query = $this->db->get();
+        return $query->row();
+    }
 
     // get all purchases
     public function select_purchases()
@@ -301,7 +297,7 @@ purchase_company.grand_total,purchase_company.due_amount")
             ->from('vendor,purchase_company, usr_user')
             ->where('purchase_company.vendor_id = vendor.vendor_id')
             ->where('usr_user.USER_ID` = purchase_company.purchase_user_id')->get();
-			
+
         return $query->result();
     }
 
@@ -477,7 +473,7 @@ AND pc.purchase_date BETWEEN '$start_date1' AND '$end_date1'
 AND pc.purchase_no = p.purchase_no
 GROUP BY pc.purchase_date
 ORDER BY pc.purchase_no DESC");
-///echo $this->db->last_query();
+        ///echo $this->db->last_query();
         return $query->result();
     }
 
@@ -517,7 +513,6 @@ ORDER BY pc.sales_no DESC ")->result();
             ->where('s.company_id = co.company_id')
             ->get();
         return $query->row();
-
     }
 
     // get invoice by dates
@@ -538,7 +533,7 @@ ORDER BY pc.sales_no DESC ")->result();
 
         return $result;
     }
-	public function get_invoice_by_date1($start_date, $end_date)
+    public function get_invoice_by_date1($start_date, $end_date)
     {
         $this->db->select('purchase_company.*', false);
         // $this->db->select('sales_detail.*', false);
@@ -567,7 +562,7 @@ ORDER BY pc.sales_no DESC ")->result();
         //echo $this->db->last_query();
         return $query->result();
     }
-	public function p_detail($sales_no)
+    public function p_detail($sales_no)
     {
         $query = $this->db->select()->from('purchase as sd,item as i, stock as s')
             ->where('sd.item_id = i.item_id')
@@ -613,5 +608,4 @@ ORDER BY pc.sales_no DESC ")->result();
         $query = $this->db->get()->result();
         return $query;
     }
-
 }

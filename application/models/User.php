@@ -9,7 +9,7 @@ if (!defined('BASEPATH'))
  *  @support: shahmian@gmail.com
  *	date	: 18 October, 2017
  *	Kandi Inventory Management System
- *	http://kelextech.com
+ *	https://phptiger.com
  *  version: 1.0
  */
 
@@ -58,5 +58,3 @@ class User extends CI_Model
     }
 
 }
-
-?>

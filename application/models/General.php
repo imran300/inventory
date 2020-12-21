@@ -10,8 +10,7 @@ if (!defined('BASEPATH'))
  *	@author : Imran Shah
  *  @support: shahmian@gmail.com
  *	date	: 18 October, 2017
- *	Kandi Inventory Management System
- *	http://kelextech.com
+ *	https://phptiger.com
  *  version: 1.0
  */
 
@@ -19,8 +18,6 @@ class General extends CI_Model
 {
     function index()
     {
-
-
     }
 
     public function count_all($tbl)
@@ -62,15 +59,12 @@ class General extends CI_Model
             foreach ($query->result() as $row) {
 
                 $data[] = $row;
-
             }
 
             return $data;
-
         }
 
         return false;
-
     }
 
     //check child menu count
@@ -92,8 +86,6 @@ class General extends CI_Model
         $this->db->from('usr_menu');
 
         return $this->db->count_all_results();
-
-
     }
 
     // fetching records by single column
@@ -113,7 +105,6 @@ class General extends CI_Model
         $query = $this->db->get();
 
         return $result = $query->result();
-
     }
 
     //Custom Query function
@@ -122,10 +113,8 @@ class General extends CI_Model
 
         $query = $this->db->query($sql);
 
-//echo $this->db->last_query();
+        //echo $this->db->last_query();
         return $query->result();
-
-
     }
 
     //find max id
@@ -139,7 +128,6 @@ class General extends CI_Model
 
 
         return $query->row();
-
     }
 
 
@@ -150,7 +138,6 @@ class General extends CI_Model
         $this->db->set($data);
 
         $this->db->insert($tbl);
-
     }
 
     //Fetch New Entry with Increment......
@@ -164,7 +151,6 @@ class General extends CI_Model
 
 
         return $query->result();
-
     }
 
 
@@ -179,7 +165,6 @@ class General extends CI_Model
 
 
         return $query->result();
-
     }
 
     //Update Groupe
@@ -197,7 +182,6 @@ class General extends CI_Model
         $this->db->where('GROUP_ID', $group_id);
 
         return $this->db->update('usr_group', $update);
-
     }
 
     //Fetch Group By Id...
@@ -216,7 +200,6 @@ class General extends CI_Model
 
 
         return $query->result();
-
     }
 
     //Fetch Menu By Id...
@@ -235,7 +218,6 @@ class General extends CI_Model
 
 
         return $query->result();
-
     }
 
     //Update Menu
@@ -267,7 +249,6 @@ class General extends CI_Model
         $this->db->where('MENU_ID', $menu_id);
 
         return $this->db->update('usr_menu', $update);
-
     }
 
     // fetch maximum id for permission
@@ -283,7 +264,6 @@ class General extends CI_Model
 
 
         return $data;
-
     }
 
     // fetch permission by group
@@ -302,7 +282,6 @@ class General extends CI_Model
 
 
         return $query->result();
-
     }
 
     //fetch num rows of menus for a group
@@ -321,8 +300,6 @@ class General extends CI_Model
 
 
         return $query->num_rows();
-
-
     }
 
     //fetch menus by a group
@@ -341,8 +318,6 @@ class General extends CI_Model
 
 
         return $query->result();
-
-
     }
 
     //updating permission records
@@ -355,8 +330,6 @@ class General extends CI_Model
         $this->db->update($tbl, $data);
 
         return true;
-
-
     }
 
     ////////////////// 03 START ////////////////////////////
@@ -374,7 +347,6 @@ class General extends CI_Model
         $i = $this->db->get();
 
         return ($i->num_rows > 0) ? $i->row() : array();
-
     }
 
     // dynamic query for updating
@@ -384,7 +356,6 @@ class General extends CI_Model
         $this->db->where($where);
 
         return $this->db->update($tbl, $update);
-
     }
 
     //delete records
@@ -395,8 +366,6 @@ class General extends CI_Model
         $this->db->where($whr);
 
         $this->db->delete($tbl);
-
-
     }
 
     //======  02 starts =========== //
@@ -420,27 +389,24 @@ class General extends CI_Model
                        </div>";
             $this->session->set_flashdata('msg', $message);
         }
-
-
     }
 
 
-// ============= 02 ends =========== //
+    // ============= 02 ends =========== //
 
     //selecting and where clause dynamic query
-    public function select_where($table, $where,$flag='')
+    public function select_where($table, $where, $flag = '')
     {
 
         $this->db->select();
         $this->db->from($table);
         $this->db->where($where);
         $query = $this->db->get();
-        if($flag == 's')
-        return $query->row();
-		else
-			return $query->result_array();
-
-	}
+        if ($flag == 's')
+            return $query->row();
+        else
+            return $query->result_array();
+    }
 
     public function get_company_info()
     {
@@ -459,7 +425,6 @@ class General extends CI_Model
             'website' => $data['website'],
         );
         $this->db->WHERE('id', $id)->update('company_information', $item);
-
     }
 
     function check_url_permission($menu_id)
@@ -518,6 +483,4 @@ AND up.group_id = $group_id")->num_rows();
         );
         $this->db->WHERE('business_settings_id', 4)->update('business_settings', $item);
     }
-
-
 }
