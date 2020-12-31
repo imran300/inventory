@@ -95,4 +95,16 @@ if ( ! function_exists('currency'))
 }
 
 
-?>
+if (!function_exists('getSalesReturn')) {
+	function getSalesReturn($sale_no, $sale_id)
+	{
+		$CI =& get_instance();
+		$CI->load->database();
+		$return = $CI->db->get_where("sales_return", array("sales_no" => $sale_no, "sales_id" => $sale_id))->row();
+		if (!empty($return->return_qty)):
+			return $return->return_qty;
+		else:
+			return 0;
+		endif;
+	}
+}
