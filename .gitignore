@@ -4,6 +4,14 @@ application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
 
+application/views/reports/accounts/ledger.php
+application/views/reports/accounts/bankbook.php
+application/views/reports/duePayments.php
+application/views/reports/accounts/bills-receiveable.php
+application/views/reports/accounts/trialBalance.php
+application/views/reports/accounts/cashbook.php
+application/views/reports/stockSummary.php
+
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
