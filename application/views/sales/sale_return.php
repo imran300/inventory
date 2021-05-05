@@ -4,47 +4,40 @@
 <?php } ?>
 <table class="table">
 	<thead>
-	<tr>
-		<th>Item Name</th>
-		<th>Sale Qty</th>
-		<th>Unit Price</th>
-		<th>Return Qunatity</th>
-	</tr>
+		<tr>
+			<th>Item Name</th>
+			<th>Sale Qty</th>
+			<th>Unit Price</th>
+			<th>Return Qunatity</th>
+		</tr>
 	</thead>
 	<tbody>
-	<?php if (!empty($sale_details)): foreach ($sale_details as $sdetails): ?>
-		<?php
-		if ($sdetails["sales_qty"] > getSalesReturn($sdetails['sales_no'],$sdetails['sales_id'])) {
+		<?php if (!empty($sale_details)) : foreach ($sale_details as $sdetails) : ?>
+				<?php
+				if ($sdetails["sales_qty"] > getSalesReturn($sdetails['sales_no'], $sdetails['sales_id'])) {
 
-			?>
-			<tr>
-				<td><?= $sdetails['item_name']; ?></td>
-				<td><?= $sdetails['sales_qty'] - getSalesReturn($sdetails['sales_no'],$sdetails['sales_id']); ?></td>
-				<td><?= $sdetails['sales_rate']; ?></td>
-				<td><input type="text" class="form-control m-input" name="ReturnQuantity_<?= $sdetails['sales_id']; ?>"
-						   id="ReturnQuantity_<?= $sdetails['sales_id']; ?>">
-					<button type="button" class="btn btn-info" onclick="returnQty(<?= $sdetails['sales_id']; ?>)"
-							name="return_<?= $sdetails['sales_id'] ?>" id="return_<?= $sdetails['sales_id'] ?>">Return
-					</button>
-				</td>
-			</tr>
-			<input type="hidden" name="item_id_<?= $sdetails['sales_id']; ?>" id="item_id_<?= $sdetails['sales_id']; ?>" value="<?php echo $sdetails['item_id'];?>">
-			<input type="hidden" name="quantity_<?= $sdetails['sales_id']; ?>"
-				   id="quantity_<?= $sdetails['sales_id']; ?>"
-				   value="<?= $sdetails['sales_qty']; ?>">
-			<input type="hidden" name="unit_price_<?= $sdetails['sales_id']; ?>"
-				   id="unit_price_<?= $sdetails['sales_id']; ?>"
-				   value="<?= $sdetails['sales_rate']; ?>">
-			<input type="hidden" name="SaleID" id="SaleID" value="<?= $sdetails['sales_no']; ?>">
-			<input type="hidden" name="sales_id" id="sales_id_<?= $sdetails['sales_id']; ?>"
-				   value="<?= $sdetails['sales_id']; ?>">
+				?>
+					<tr>
+						<td><?= $sdetails['item_name']; ?></td>
+						<td><?= $sdetails['sales_qty'] - getSalesReturn($sdetails['sales_no'], $sdetails['sales_id']); ?></td>
+						<td><?= $sdetails['sales_rate']; ?></td>
+						<td><input type="text" class="form-control m-input" name="ReturnQuantity_<?= $sdetails['sales_id']; ?>" id="ReturnQuantity_<?= $sdetails['sales_id']; ?>">
+							<button type="button" class="btn btn-info" onclick="returnQty(<?= $sdetails['sales_id']; ?>)" name="return_<?= $sdetails['sales_id'] ?>" id="return_<?= $sdetails['sales_id'] ?>">Return
+							</button>
+						</td>
+					</tr>
+					<input type="hidden" name="item_id_<?= $sdetails['sales_id']; ?>" id="item_id_<?= $sdetails['sales_id']; ?>" value="<?php echo $sdetails['item_id']; ?>">
+					<input type="hidden" name="quantity_<?= $sdetails['sales_id']; ?>" id="quantity_<?= $sdetails['sales_id']; ?>" value="<?= $sdetails['sales_qty']; ?>">
+					<input type="hidden" name="unit_price_<?= $sdetails['sales_id']; ?>" id="unit_price_<?= $sdetails['sales_id']; ?>" value="<?= $sdetails['sales_rate']; ?>">
+					<input type="hidden" name="SaleID" id="SaleID" value="<?= $sdetails['sales_no']; ?>">
+					<input type="hidden" name="sales_id" id="sales_id_<?= $sdetails['sales_id']; ?>" value="<?= $sdetails['sales_id']; ?>">
 			<?php
-		}
-	endforeach;
+				}
+			endforeach;
 
-	else: ?>
-		<p>Data(s) not available.</p>
-	<?php endif; ?>
+		else : ?>
+			<p>Data(s) not available.</p>
+		<?php endif; ?>
 
 	</tbody>
 </table>
@@ -58,6 +51,8 @@
 		var supplierID = $("#supplierID").val();
 		var total_sale = $("#total_sale").val();
 		var ReturnQuantity = $("#ReturnQuantity_" + sales_id).val();
+		var csrfName = '<?php echo $this->security->get_csrf_token_name(); ?>',
+			csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
 		var fd = {
 			sales_id: sales_id,
 			SaleID: SaleID,
@@ -66,13 +61,14 @@
 			ReturnQuantity: ReturnQuantity,
 			total_sale: total_sale,
 			item_id: item_id,
-			squantity: squantity
+			squantity: squantity,
+			[csrfName]: csrfHash
 		};
 		$.ajax({
-			"url": "<?php echo site_url('Sales/saleReturn')?>",
+			"url": "<?php echo site_url('Sales/saleReturn') ?>",
 			data: fd,
 			type: "POST",
-			success: function (res) {
+			success: function(res) {
 				res = $.parseJSON(res);
 				if (res.type === "error") {
 					//$("#status_msg").html(res.response);
@@ -88,7 +84,7 @@
 
 				}
 			},
-			error: function (xhr) {
+			error: function(xhr) {
 				$("#status_msg").html("Error: - " + xhr.status + " " + xhr.statusText);
 			}
 		});

@@ -15,7 +15,6 @@ foreach ($sales as $results) {
                                   Sales History
                               </a><a href='javascript:;' id='edit_sales_return' data-id='" . $results->sales_no . "' class='btn btn-warning'>Sales Return</a> </td>
                 ";
-
 }
 ?>
 <!-- page start-->
@@ -26,22 +25,21 @@ foreach ($sales as $results) {
 	</header>
 	<div class="panel-body">
 		<div class="adv-table editable-table table-responsive">
-			<table id="example1" class="table table-striped table-hover table-bordered dataTable"
-				   aria-describedby="editable-sample_info">
+			<table id="example1" class="table table-striped table-hover table-bordered dataTable" aria-describedby="editable-sample_info">
 				<thead>
-				<tr role="row">
-					<th>Sales Code</th>
-					<th>Customer</th>
-					<th>Date</th>
-					<th>Total</th>
-					<th>Action</th>
-				</tr>
+					<tr role="row">
+						<th>Sales Code</th>
+						<th>Customer</th>
+						<th>Date</th>
+						<th>Total</th>
+						<th>Action</th>
+					</tr>
 				</thead>
 
 				<tbody role="alert" aria-live="polite" aria-relevant="all">
-				<?php if (!empty($custlistRow)) {
-					echo $custlistRow;
-				} ?>
+					<?php if (!empty($custlistRow)) {
+						echo $custlistRow;
+					} ?>
 				</tbody>
 			</table>
 		</div>
@@ -69,23 +67,26 @@ foreach ($sales as $results) {
 </div>
 
 <script>
-
-	$("body").on("click", "#edit_sales_return", function () {
+	$("body").on("click", "#edit_sales_return", function() {
 		var sales_no = $(this).data('id');
+		var csrfName = '<?php echo $this->security->get_csrf_token_name(); ?>',
+			csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
+
 		try {
 			$("#sales_return").modal("show");
 			$.ajax({
-				url: "<?php echo base_url('Sales/getSalesDataReturn')?>",
+				url: "<?php echo base_url('Sales/getSalesDataReturn') ?>",
 				data: {
-					sales_no: sales_no
+					sales_no: sales_no,
+					[csrfName]: csrfHash
 				},
 				type: 'POST',
 				cache: false,
-				success: function (frm) {
+				success: function(frm) {
 					$("#edit_body").html(frm);
-					$("#ReturnQuantity_"+sales_no).val('');
+					$("#ReturnQuantity_" + sales_no).val('');
 				},
-				error: function (xhr) {
+				error: function(xhr) {
 					$("#modal_body").html(xhr.status + ' ' + xhr.statusText);
 				}
 			});

@@ -225,7 +225,7 @@ CREATE TABLE `employee_profile` (
 
 /*Data for the table `employee_profile` */
 
-insert  into `employee_profile`(`EMP_ID`,`EMP_NAME`,`EMP_ADDRESS`,`EMP_PHONE`,`EMP_CELL`,`EMP_EMAIL`,`EMP_PIC`,`EMP_GENDER`,`EMP_DATE`,`CREATED_DATE`,`CREATED_USERID`,`UPDATED_DATE`,`UPDATED_USERID`) values (1,'Imran Shah','Charsadda','2324030','03339276769','shahmian@gmail.com','employee_pics/3e70faef699d1b5a8c8ddc449fac5988.jpg','MALE','2018-09-01','2018-09-01',1,NULL,NULL);
+insert  into `employee_profile`(`EMP_ID`,`EMP_NAME`,`EMP_ADDRESS`,`EMP_PHONE`,`EMP_CELL`,`EMP_EMAIL`,`EMP_PIC`,`EMP_GENDER`,`EMP_DATE`,`CREATED_DATE`,`CREATED_USERID`,`UPDATED_DATE`,`UPDATED_USERID`) values (1,'Imran Shah','Charsadda','2324030','03331234567','shahmian@gmail.com','employee_pics/3e70faef699d1b5a8c8ddc449fac5988.jpg','MALE','2018-09-01','2018-09-01',1,NULL,NULL);
 
 /*Table structure for table `employees` */
 
