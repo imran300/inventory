@@ -42,14 +42,22 @@ class Category extends MY_Controller
     // Add new category to Databse
     public function insert_category()
     {
+        $this->load->library('form_validation');
         extract($_POST);
-        $data = array(
-            'category_name' => $category_name
-        );
-        $response = $this->Main_model->add_record('category', $data);
-        if ($response) {
-            $this->session->set_flashdata('success', 'Record added Successfully..!');
+        $this->form_validation->set_rules('category_name', 'Category Name', 'trim|required|min_length[5]|max_length[12]');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', 'Invalid Input');
             redirect(base_url() . 'index.php/category/list_category');
+        } else {
+
+            $data = array(
+                'category_name' => $this->security->xss_clean($category_name)
+            );
+            $response = $this->Main_model->add_record('category', $data);
+            if ($response) {
+                $this->session->set_flashdata('success', 'Record added Successfully..!');
+                redirect(base_url() . 'index.php/category/list_category');
+            }
         }
     }
 
@@ -58,9 +66,17 @@ class Category extends MY_Controller
     {
         $cat_id = $this->input->post('cid');
 
-        $category = array(
-            'category_name' => $this->input->post('category_name'),
-        );
+        $this->load->library('form_validation');
+        extract($_POST);
+        $this->form_validation->set_rules('category_name', 'Category Name', 'trim|required|min_length[5]|max_length[12]');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', 'Invalid Input');
+            redirect(base_url() . 'index.php/category/list_category');
+        } else {
+
+            $data = array(
+                'category_name' => $this->security->xss_clean($category_name)
+            );
         $where = array('category_id' => $cat_id);
         $this->load->model('Main_model');
         $response = $this->Main_model->update_record('category', $category, $where);
