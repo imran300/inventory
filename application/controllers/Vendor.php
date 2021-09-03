@@ -55,19 +55,31 @@ class Vendor extends MY_Controller
     // Insert new Vendor to Database
     public function insert_vendor()
     {
-        $data = array(
-            'vendor_name' => $this->input->post("vendor_name"),
-            'phone_no' => $this->input->post("phone_no"),
-            'fax_no' => $this->input->post("fax_no"),
-            'email' => $this->input->post("email"),
-            'company_id' => $this->input->post("company_id"),
-
-        );
-        $this->load->model('Main_model');
-        $response = $this->Main_model->add_record('vendor', $data);
-        if ($response) {
-            $this->session->set_flashdata('success', 'Record added Successfully..!');
+        $this->load->library('form_validation');
+        extract($_POST);
+        $this->form_validation->set_rules('vendor_name', 'Vendor Name', 'trim|required|min_length[5]|max_length[12]');
+        $this->form_validation->set_rules('phone_no', 'Phone No', 'trim|min_length[5]|max_length[12]|alpha_numeric');
+        $this->form_validation->set_rules('fax_no', 'Fax No', 'trim|min_length[5]|max_length[12]|alpha_numeric');
+        $this->form_validation->set_rules('email', 'Email', 'trim|min_length[5]|max_length[12]|valid_email');
+        $this->form_validation->set_rules('company_id', 'Company Name', 'trim|required|min_length[5]|max_length[12]');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', 'Invalid Input');
             redirect(base_url() . 'index.php/Vendor/list_vendors');
+        } else {
+            $data = array(
+                'vendor_name' => $this->security->xss_clean($this->input->post("vendor_name")),
+                'phone_no' => $this->security->xss_clean($this->input->post("phone_no")),
+                'fax_no' => $this->security->xss_clean($this->input->post("fax_no")),
+                'email' => $this->security->xss_clean($this->input->post("email")),
+                'company_id' => $this->security->xss_clean($this->input->post("company_id")),
+
+            );
+            $this->load->model('Main_model');
+            $response = $this->Main_model->add_record('vendor', $data);
+            if ($response) {
+                $this->session->set_flashdata('success', 'Record added Successfully..!');
+                redirect(base_url() . 'index.php/Vendor/list_vendors');
+            }
         }
     }
 
@@ -75,21 +87,32 @@ class Vendor extends MY_Controller
     public function update_vendor()
     {
         $comp_id = $this->input->post('cid');
-
-        $comp_info = array(
-            'vendor_name' => $this->input->post('vendor_name'),
-            'phone_no' => $this->input->post('phone_no'),
-            'fax_no' => $this->input->post('fax_no'),
-            'email' => $this->input->post('email'),
-            'company_id' => $this->input->post('company_id')
-        );
-
-        $where = array('vendor_id' => $comp_id);
-        $this->load->model('Main_model');
-        $response = $this->Main_model->update_record('vendor', $comp_info, $where);
-        if ($response) {
-            $this->session->set_flashdata('update', 'Record Updated Successfully..!');
+        $this->load->library('form_validation');
+        extract($_POST);
+        $this->form_validation->set_rules('vendor_name', 'Vendor Name', 'trim|required|min_length[5]|max_length[12]');
+        $this->form_validation->set_rules('phone_no', 'Phone No', 'trim|min_length[5]|max_length[12]|alpha_numeric');
+        $this->form_validation->set_rules('fax_no', 'Fax No', 'trim|min_length[5]|max_length[12]|alpha_numeric');
+        $this->form_validation->set_rules('email', 'Email', 'trim|min_length[5]|max_length[12]|valid_email');
+        $this->form_validation->set_rules('company_id', 'Company Name', 'trim|required|min_length[5]|max_length[12]');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', 'Invalid Input');
             redirect(base_url() . 'index.php/Vendor/list_vendors');
+        } else {
+            $comp_info = array(
+                'vendor_name' => $this->security->xss_clean($this->input->post("vendor_name")),
+                'phone_no' => $this->security->xss_clean($this->input->post("phone_no")),
+                'fax_no' => $this->security->xss_clean($this->input->post("fax_no")),
+                'email' => $this->security->xss_clean($this->input->post("email")),
+                'company_id' => $this->security->xss_clean($this->input->post("company_id")),
+
+            );
+            $where = array('vendor_id' => $comp_id);
+            $this->load->model('Main_model');
+            $response = $this->Main_model->update_record('vendor', $comp_info, $where);
+            if ($response) {
+                $this->session->set_flashdata('update', 'Record Updated Successfully..!');
+                redirect(base_url() . 'index.php/Vendor/list_vendors');
+            }
         }
     }
 }
