@@ -465,6 +465,7 @@ AND up.group_id = $group_id")->num_rows();
         if ($query > 0) {
             return $query;
         } else {
+            $this->session->set_flashdata('error', 'You dont have permission');
             redirect(base_url());
         }
     }

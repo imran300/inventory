@@ -96,7 +96,10 @@ class Users extends MY_Controller
     //Load View Form For User Creation.........
     public function add_user()
     {
-
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         //Get employee list for drop down menu..................................
         $data['employeelist'] = $this->General->fetch_records("employee_profile");
         $data['grouplist'] = $this->General->fetch_records("usr_group");
@@ -115,7 +118,10 @@ class Users extends MY_Controller
     //Get values and Create User................
     public function create_user()
     {
-
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $record = $this->General->fetch_maxid("usr_user");
         foreach ($record as $record) {
             $MaxGroup = $record->USER_ID;
@@ -146,6 +152,10 @@ class Users extends MY_Controller
     // List all users
     public function list_users()
     {
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $this->header($title = 'Users List');
         $this->load->view();
         $this->footer();
@@ -154,6 +164,10 @@ class Users extends MY_Controller
     // Delete specific user
     public function delete_users($id)
     {
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $this->db->where('USER_ID', $id);
         $this->db->delete('usr_user');
 
@@ -164,6 +178,10 @@ class Users extends MY_Controller
     //status of user (Active)
     public function activeStatus()
     {
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $id = $this->uri->segment(3);
         $update = array(
             'IS_ACTIVE' => '1'
@@ -177,10 +195,19 @@ class Users extends MY_Controller
         redirect(base_url() . "index.php/Users/add_user");
     }
 
+    function _check_token($token)
+    {
+        return ($token === $_COOKIE[$this->csrf_cookie_name]);
+    }
+
     //status of user (In-active)
     public function deactiveStatus()
     {
 
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $id = $this->uri->segment(3);
         $update = array(
             'IS_ACTIVE' => '0'
@@ -197,12 +224,20 @@ class Users extends MY_Controller
     // Registering a new User Form
     public function register()
     {
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $this->load->view('users/register');
     }
 
     // Registering User Insert
     public function registration()
     {
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         extract($_POST);
         $full_name = $this->input->post('full_name');
         $user_name = $this->input->post('user_name');

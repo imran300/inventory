@@ -1,4 +1,6 @@
-
+<?php if ($this->session->flashdata('error'))
+    echo $this->session->flashdata('error');
+?>
 <div class="row">
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
@@ -101,8 +103,8 @@
             <div class="info-box-content">
                 <span class="info-box-text">Today Sales</span>
                 <span class="info-box-number"><?php foreach ($today_sales as $today_sale) {
-                        echo $today_sale->sales_amount_total;
-                    } ?></span>
+                                                    echo $today_sale->sales_amount_total;
+                                                } ?></span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -116,8 +118,8 @@
             <div class="info-box-content">
                 <span class="info-box-text">This Month Sales</span>
                 <span class="info-box-number"><?php foreach ($today_sales as $today_sale) {
-                        echo $today_sale->sales_amount_total;
-                    } ?></span>
+                                                    echo $today_sale->sales_amount_total;
+                                                } ?></span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -143,33 +145,33 @@
                 <div class="table-responsive">
                     <table class="table no-margin">
                         <thead>
-                        <tr>
-                            <th>UserName</th>
-                            <th>Group</th>
-                            <th>Status</th>
-                            <th>Created</th>
-                        </tr>
+                            <tr>
+                                <th>UserName</th>
+                                <th>Group</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <?php if (!empty($users_list)) {
-                            foreach ($users_list as $users) : ?>
-                                <tr>
-                                    <td><?= $users->USER_NAME; ?></td>
-                                    <td><?= $users->GROUP_NAME; ?></td>
-                                    <td><?php if ($users->IS_ACTIVE == 1) { ?>
-                                            <span class="label label-success">ACTIVE</span>
-                                        <?php } else { ?>
-                                            <span class="label label-default">INACTIVE</span>
-                                        <?php } ?>
-                                    </td>
-                                    <td>
-                                        <?= date("d M,Y", strtotime($users->CREATED_DATE)); ?>
-                                    </td>
-                                </tr>
+                            <?php if (!empty($users_list)) {
+                                foreach ($users_list as $users) : ?>
+                                    <tr>
+                                        <td><?= $users->USER_NAME; ?></td>
+                                        <td><?= $users->GROUP_NAME; ?></td>
+                                        <td><?php if ($users->IS_ACTIVE == 1) { ?>
+                                                <span class="label label-success">ACTIVE</span>
+                                            <?php } else { ?>
+                                                <span class="label label-default">INACTIVE</span>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?= date("d M,Y", strtotime($users->CREATED_DATE)); ?>
+                                        </td>
+                                    </tr>
                             <?php endforeach;
-                        } else {
-                            echo "<tr><td>No Records Found</td></tr>";
-                        } ?>
+                            } else {
+                                echo "<tr><td>No Records Found</td></tr>";
+                            } ?>
                         </tbody>
                     </table>
                 </div>
@@ -186,13 +188,12 @@
             <div class="box-body">
                 <div class="container" style="width:500px;">
                     <h2 align="center">Search Employees</h2>
-                    <br/><br/>
+                    <br /><br />
                     <div align="center">
-                        <input type="text" name="search" id="search" placeholder="Search Employee Details"
-                               class="form-control input-medium"/>
+                        <input type="text" name="search" id="search" placeholder="Search Employee Details" class="form-control input-medium" />
                     </div>
                     <ul class="list-group" id="result"></ul>
-                    <br/>
+                    <br />
                 </div>
 
             </div>
@@ -210,38 +211,39 @@
             <div class="box-body">
                 <table class="table table-hover personal-task">
                     <tbody>
-                    <tr>
-                        <td>Item Qty</td>
-                        <td>Name</td>
-                        <td>Price</td>
-                    </tr>
-                    <?php $i = 1;
-                    foreach ($daily_st as $daily_st) { ?>
                         <tr>
-                            <td><span class="date">
-                <?php $aaa = $daily_st->stock_qty;
-                if ($aaa < 10) {
-                    ?>
-                    <font style="text-decoration:blink; color:#F00; font-size:18px">
-                        <?php
-                        echo "<span class='label label-danger'>$daily_st->stock_qty</span>";
-
-
-                        ?>
-                    </font>
-                    <?php
-
-                } else {
-                    echo " <span class='label label-success'>$daily_st->stock_qty</span>";
-                }
-                ?>
-                </span> <span class="time">
-                <?php //echo $daily_st->category_name;?>
-                </span></td>
-                            <td><a href="#"><?php echo $daily_st->item_name; ?></a></td>
-                            <td><span class="price"><?php echo $daily_st->stock_rate; ?></span></td>
+                            <td>Item Qty</td>
+                            <td>Name</td>
+                            <td>Price</td>
                         </tr>
-                    <?php } ?>
+                        <?php $i = 1;
+                        foreach ($daily_st as $daily_st) { ?>
+                            <tr>
+                                <td><span class="date">
+                                        <?php $aaa = $daily_st->stock_qty;
+                                        if ($aaa < 10) {
+                                        ?>
+                                            <font style="text-decoration:blink; color:#F00; font-size:18px">
+                                                <?php
+                                                echo "<span class='label label-danger'>$daily_st->stock_qty</span>";
+
+
+                                                ?>
+                                            </font>
+                                        <?php
+
+                                        } else {
+                                            echo " <span class='label label-success'>$daily_st->stock_qty</span>";
+                                        }
+                                        ?>
+                                    </span> <span class="time">
+                                        <?php //echo $daily_st->category_name;
+                                        ?>
+                                    </span></td>
+                                <td><a href="#"><?php echo $daily_st->item_name; ?></a></td>
+                                <td><span class="price"><?php echo $daily_st->stock_rate; ?></span></td>
+                            </tr>
+                        <?php } ?>
 
                     </tbody>
                     <tfoot>
@@ -263,35 +265,34 @@
             <div class="box-body">
                 <table class="table no-margin">
                     <thead>
-                    <tr>
-                        <th>Purchase ID</th>
-                        <th>Vendor</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Purchase Total</th>
-                        <th>View</th>
-                    </tr>
+                        <tr>
+                            <th>Purchase ID</th>
+                            <th>Vendor</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Purchase Total</th>
+                            <th>View</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($due_amounts as $due_amount) : ?>
-                        <tr>
-                            <td>
-                                <a href="<?= base_url(); ?>purchase/show_purchase_history/<?= $due_amount->purchase_no ?>"><?= $due_amount->purchase_no; ?></a>
-                            </td>
-                            <td><?= $due_amount->vendor_name; ?></td>
-                            <td><?= date("d-m-Y", strtotime($due_amount->purchase_date)); ?></td>
-                            <td>
-                                <span class="label label-warning">PENDING</span>
+                        <?php foreach ($due_amounts as $due_amount) : ?>
+                            <tr>
+                                <td>
+                                    <a href="<?= base_url(); ?>purchase/show_purchase_history/<?= $due_amount->purchase_no ?>"><?= $due_amount->purchase_no; ?></a>
+                                </td>
+                                <td><?= $due_amount->vendor_name; ?></td>
+                                <td><?= date("d-m-Y", strtotime($due_amount->purchase_date)); ?></td>
+                                <td>
+                                    <span class="label label-warning">PENDING</span>
 
-                            </td>
-                            <td>Rs. <?= $due_amount->grand_total; ?></td>
-                            <td>
-                                <a href="<?= base_url(); ?>purchase/show_purchase_history/<?= $due_amount->purchase_no ?>"
-                                   class="btn btn-info">View Purchase</a>
+                                </td>
+                                <td>Rs. <?= $due_amount->grand_total; ?></td>
+                                <td>
+                                    <a href="<?= base_url(); ?>purchase/show_purchase_history/<?= $due_amount->purchase_no ?>" class="btn btn-info">View Purchase</a>
 
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div><!-- /.box-body -->
@@ -303,7 +304,8 @@
 
 <div class="row">
     <div class="col-md-4">
-        <div class="box"><!-- /primary heading -->
+        <div class="box">
+            <!-- /primary heading -->
             <div class="box-heading">
                 <h4 class="box-title text-dark text-uppercase">
                     Top 5 Selling Product June </h4>
@@ -313,31 +315,32 @@
 
                     <table class="table no-margin">
                         <thead>
-                        <tr>
-                            <th>Sl</th>
-                            <th>Barcode</th>
-                            <th>Product Name</th>
-                            <th>Qty</th>
-                        </tr>
+                            <tr>
+                                <th>Sl</th>
+                                <th>Barcode</th>
+                                <th>Product Name</th>
+                                <th>Qty</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <?php if (!empty($topsales)) {
-                            $i = 1;
-                            foreach ($topsales as $topsale) : ?>
+                            <?php if (!empty($topsales)) {
+                                $i = 1;
+                                foreach ($topsales as $topsale) : ?>
 
-                                <tr>
-                                    <td><?= $i; ?></td>
-                                    <td><?= $topsale->item_id; ?></td>
-                                    <td><?= $topsale->item_name; ?></td>
-                                    <td><?= $topsale->sales_qty; ?></td>
+                                    <tr>
+                                        <td><?= $i; ?></td>
+                                        <td><?= $topsale->item_id; ?></td>
+                                        <td><?= $topsale->item_name; ?></td>
+                                        <td><?= $topsale->sales_qty; ?></td>
+                                    </tr>
+
+                                <?php $i++;
+                                endforeach;
+                            } else { ?>
+                                <tr style="column-span: 4">
+                                    <td><strong>No Records Found</strong></td>
                                 </tr>
-
-                                <?php $i++; endforeach;
-                        } else { ?>
-                            <tr style="column-span: 4">
-                                <td><strong>No Records Found</strong></td>
-                            </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
 
@@ -346,41 +349,43 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="box light bordered"><!-- /primary heading -->
+        <div class="box light bordered">
+            <!-- /primary heading -->
             <div class="box-heading">
                 <h4 class="box-title text-dark text-uppercase">
-                    Top 5 Selling Product <?=date('Y');?> </h4>
+                    Top 5 Selling Product <?= date('Y'); ?> </h4>
             </div>
             <div id="box2" class="panel-collapse collapse in">
                 <div class="box-body" style="height: 400px">
 
                     <table class="table no-margin">
                         <thead>
-                        <tr>
-                            <th>Sl</th>
-                            <th>Barcode</th>
-                            <th>Product Name</th>
-                            <th>Qty</th>
-                        </tr>
+                            <tr>
+                                <th>Sl</th>
+                                <th>Barcode</th>
+                                <th>Product Name</th>
+                                <th>Qty</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <?php if (!empty($topSalesYear)) {
-                            $i = 1;
-                            foreach ($topSalesYear as $topsale) : ?>
+                            <?php if (!empty($topSalesYear)) {
+                                $i = 1;
+                                foreach ($topSalesYear as $topsale) : ?>
 
-                                <tr>
-                                    <td><?= $i; ?></td>
-                                    <td><?= $topsale->item_id; ?></td>
-                                    <td><?= $topsale->item_name; ?></td>
-                                    <td><?= $topsale->sales_qty; ?></td>
+                                    <tr>
+                                        <td><?= $i; ?></td>
+                                        <td><?= $topsale->item_id; ?></td>
+                                        <td><?= $topsale->item_name; ?></td>
+                                        <td><?= $topsale->sales_qty; ?></td>
+                                    </tr>
+
+                                <?php $i++;
+                                endforeach;
+                            } else { ?>
+                                <tr style="column-span: 4">
+                                    <td><strong>No Records Found</strong></td>
                                 </tr>
-
-                                <?php $i++; endforeach;
-                        } else { ?>
-                            <tr style="column-span: 4">
-                                <td><strong>No Records Found</strong></td>
-                            </tr>
-                        <?php } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
 

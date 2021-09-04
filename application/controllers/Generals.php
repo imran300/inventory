@@ -81,6 +81,10 @@ class generals extends MY_Controller
     //Add Group....
     public function add_group()
     {
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
 
         $this->header();
         $data['group_list'] = $this->General->fetch_records("usr_group");
@@ -92,6 +96,10 @@ class generals extends MY_Controller
     public function create_group()
     {
 
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $group_name = $this->input->post('group_name');
 
         $record = $this->General->fetch_maxid("usr_group");
@@ -116,6 +124,10 @@ class generals extends MY_Controller
     //Edit Group....
     public function edit_group($id)
     {
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $group['groups'] = $this->General->fetch_groupbyid($id);
         $this->header();
         $this->load->view('generals/edit_group', $group);
@@ -125,6 +137,10 @@ class generals extends MY_Controller
     //Update Group......
     public function update_group()
     {
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $group_name = $this->input->post('group_name');
         $group_id = $this->input->post('group_id');
         $this->General->update_group($group_name, $group_id);
@@ -136,7 +152,10 @@ class generals extends MY_Controller
     public function addmenu()
     {
 
-
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $this->header();
 
         $col = "PARENT_ID";
@@ -176,7 +195,10 @@ class generals extends MY_Controller
     //Create menu....
     public function create_menu()
     {
-
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $menu = $this->input->post('MENU_TEXT');
         $url = $this->input->post('MENU_URL');
         $parent = $this->input->post('PARENT_ID');
@@ -209,7 +231,10 @@ class generals extends MY_Controller
     //Fetch All menus.........
     public function list_menu()
     {
-
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $menu['menus'] = $this->General->fetch_records("usr_menu");
 
         $this->header();
@@ -220,6 +245,10 @@ class generals extends MY_Controller
     //Edit Menu....
     public function edit_menu($id)
     {
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
 
         $menu['menus'] = $this->General->fetch_menubyid($id);
         $this->header();
@@ -230,7 +259,10 @@ class generals extends MY_Controller
     //Update Menu....
     public function update_menu()
     {
-
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
 
         extract($_POST);
         $this->General->update_menu();
@@ -242,7 +274,10 @@ class generals extends MY_Controller
     //Add permission.....
     public function add_permission($id)
     {
-
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         $data['parentnav'] = $this->Menus->fetch_parent_menu();
         $data['Generals'] = $this;
         $data['group_id'] = $id;
@@ -254,7 +289,10 @@ class generals extends MY_Controller
     // Creating Permissions for a specific group
     public function create_permission()
     {
-
+        $group_id = $this->session->userdata("group_id");
+        if ($group_id != 1) {
+            $Page = $this->General->check_url_permission_single();
+        }
         extract($_POST);
         $group_id = $this->input->post('group_id');
 
