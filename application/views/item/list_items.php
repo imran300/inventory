@@ -271,7 +271,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Add Company</h4>
+                <h4 class="modal-title">Add Product/ Item</h4>
             </div>
             <?= form_open_multipart(base_url() . 'index.php/item/insert_item', array('method' => 'POST', 'class' => 'form-horizontal')) ?>
 
