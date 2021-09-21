@@ -11,7 +11,8 @@ application/views/reports/accounts/bills-receiveable.php
 application/views/reports/accounts/trialBalance.php
 application/views/reports/accounts/cashbook.php
 application/views/reports/stockSummary.php
-
+kandi_inventory.sql
+kinventory.sql
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
