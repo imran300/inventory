@@ -1,3 +1,6 @@
+NOTE: Do support me if you want new features in this Repo.
+Paypal Email: mianmimran.shah@gmail.com 
+
 ###################
 What is Kandi Inventory
 ###################
