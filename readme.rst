@@ -12,8 +12,8 @@ UPCOMING FEATURES:
 
 Database Backup (Done)
 Sales Return (Done)
-Purchase Return
-Profit & Loss Statement
+Purchase Return (Upcoming)
+Profit & Loss Statement (Upcoming)
 
 
 ##########################
