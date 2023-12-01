@@ -1,5 +1,5 @@
 NOTE: Do support me if you want new features in this Repo.
-Paypal Email: mianmimran.shah@gmail.com 
+Paypal: https://www.paypal.me/imranshah300 
 
 ###################
 What is Kandi Inventory
@@ -25,4 +25,4 @@ https://youtu.be/ycCV66xzqY8
 
 Note: if you have any question, feel free to ask. 
 Email: shahmian@gmail.com
-Website: http://phptiger.com
+Website: http://kelextech.com
