@@ -79,9 +79,9 @@ class Item extends MY_Controller
     // Printing Barcodes
     public function printBarcodes()
     {
-        $item = $this->input->post('item_id');
+        $item = (int) $this->input->post('item_id');
         $qty = $this->input->post('quantity');
-        $data['barcodes'] = $this->db->query("select * from item where item_id = $item")->result();
+        $data['barcodes'] = $this->db->query("select * from item where item_id = ?", array($item))->result();
         $data['quantity'] = $qty;
         $data['products'] = $this->db->query("SELECT * FROM stock AS s, item AS i WHERE  s.stock_qty > 0 AND i.`item_id` = s.`item_id`")->result();
         $data['items'] = $this->Main_model->item_cat();
